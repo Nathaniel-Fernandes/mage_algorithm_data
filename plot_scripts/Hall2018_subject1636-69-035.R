@@ -22,9 +22,9 @@ library(ggplot2)
 plot_data <- list()
 plot_data[[1]] <- datafile[7698:7954, ]
 plot_data[[2]] <- datafile[7955:8129, ]
-plot_data[[5]] <- datafile[8130:8344, ]
-plot_data[[3]] <- datafile[8345:8514, ]
-plot_data[[4]] <- datafile[8515:8746, ]
+plot_data[[3]] <- datafile[8130:8344, ]
+plot_data[[4]] <- datafile[8345:8514, ]
+plot_data[[5]] <- datafile[8515:8746, ]
 
 # Name dataset, dates, and manual mage values 
 dataset <- "Hall2018_subject1636-69-035"
