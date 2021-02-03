@@ -12,11 +12,11 @@ library(ggplot2)
 
 # Subset the data exactly as was manually done
 plot_data <- list()
-plot_data[[1]] <- example_data_5_subject[2995:3282, ]
-plot_data[[2]] <- example_data_5_subject[3283:3570, ]
-plot_data[[3]] <- example_data_5_subject[3571:3858, ]
-plot_data[[4]] <- example_data_5_subject[3859:4145, ]
-plot_data[[5]] <- example_data_5_subject[4146:4433, ]
+plot_data[[1]] <- example_data_5_subject[2994:3281, ]
+plot_data[[2]] <- example_data_5_subject[3282:3569, ]
+plot_data[[3]] <- example_data_5_subject[3570:3857, ]
+plot_data[[4]] <- example_data_5_subject[3858:4144, ]
+plot_data[[5]] <- example_data_5_subject[4145:4432, ]
 
 # Name dataset, dates, and manual mage values 
 dataset <- "JHU_subject2"

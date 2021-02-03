@@ -20,11 +20,11 @@ library(ggplot2)
 
 # Subset the data exactly as was manually done
 plot_data <- list()
-plot_data[[1]] <- datafile[2:60, ]
-plot_data[[2]] <- datafile[61:353, ]
-plot_data[[3]] <- datafile[354:646, ]
-plot_data[[4]] <- datafile[647:940, ]
-plot_data[[5]] <- datafile[941:1234, ]
+plot_data[[1]] <- datafile[1:59, ]
+plot_data[[2]] <- datafile[60:352, ]
+plot_data[[3]] <- datafile[353:645, ]
+plot_data[[4]] <- datafile[646:939, ]
+plot_data[[5]] <- datafile[940:1233, ]
 
 # Name dataset, dates, and manual mage values 
 dataset <- "Dubosson2018_subject1"
