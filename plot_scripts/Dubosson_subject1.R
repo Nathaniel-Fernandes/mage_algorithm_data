@@ -36,7 +36,7 @@ figure.path <- "plot_scripts/plots/"
 pdf(file = paste0(figure.path, dataset, ".pdf", sep = ""),
     width = 10, height = 5, onefile = TRUE)
 for (i in 1:length(plot_data)) {
-  p = plot_glu(plot_data[[i]]) + ggtitle(paste0("MAGE: ", manual_mage[i], " (",
+  p = plot_glu(plot_data[[i]]) + ggtitle(paste0("Manual MAGE: ", manual_mage[i], " (",
                                                 dates[i], ")", sep = ""))
   print(p)
 }
