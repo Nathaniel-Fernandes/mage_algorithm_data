@@ -1,5 +1,5 @@
 # Script to reproduce plots for JHU_subject5 manual MAGE
-# Author: Lizzie Chun
+# Author: Elizabeth Chun
 # Date: February 1st, 2021
 
 # This data comes from one of the publically available datasets that comes with the

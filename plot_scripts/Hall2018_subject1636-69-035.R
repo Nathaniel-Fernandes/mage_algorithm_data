@@ -1,5 +1,5 @@
 # Script to reproduce plots for Hall(2018) subject 1636-69-035 manual MAGE
-# Author: Lizzie Chun
+# Author: Elizabeth Chun
 # Date: February 2nd, 2021
 
 # This dataset comes from a publically available CGM dataset. Both the link to the original
