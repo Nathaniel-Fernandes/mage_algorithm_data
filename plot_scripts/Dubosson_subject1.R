@@ -29,7 +29,7 @@ plot_data[[5]] <- datafile[940:1233, ]
 # Name dataset, dates, and manual mage values 
 dataset <- "Dubosson2018_subject1"
 dates <- c("10-1-2014", "10-2-2014", "10-3-2014", "10-4-2014", "10-5-2014")
-manual_mage <- c(52, 108, 264, 183, 150.33)
+manual_mage <- c(52, 118, 264, 183, 150.33)
 
 # Save plots to pdf
 figure.path <- "plot_scripts/plots/"
