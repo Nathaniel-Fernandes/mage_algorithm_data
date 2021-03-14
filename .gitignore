@@ -4,6 +4,6 @@
 .RData
 .Ruserdata
 optimized_ma.RData
-.csv
-.xlsx
-.xlsm
+*.csv
+*.xlsx
+*.xlsm
