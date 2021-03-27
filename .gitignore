@@ -7,3 +7,6 @@ optimized_ma.RData
 *.csv
 *.xlsx
 *.xlsm
+!cgmquantify_output.csv
+!cgmanalysis data.csv
+!EasyGV.xlsx
