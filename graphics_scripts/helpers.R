@@ -2,7 +2,7 @@
 # Author: Nathaniel Fernandes
 # Date: March 1, 2021
 
-## 1. Calculate the Error For an Algorithm on a Data set(s)
+## 1. Calculate the Error for an Algorithm on a Data set(s)
 # error calculation for new and old iglu
 # @parameter sample_index The index in the list of cgm data for the dataset
 # @param algo Whether to use the version 1 or 2 of the iglu mage algorithm

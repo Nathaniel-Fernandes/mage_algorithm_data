@@ -2,16 +2,19 @@
 # Author: Nathaniel Fernandes
 # Date: February 15, 2021
 
-# NOTE: Run entire file from top to bottom first. Then go back and run specific plots if necessary.
+# 1. Access the data from Awesome-CGM and place the files in the "data" folder inside graphics scripts. The names should be "Hall2018_processed.csv", "Tsalikian2005_processed.csv", "Dubosson2018_processed.csv", and ExampleData5Subjects.csv (optional).
 
-# clear global environment, load datasets, source helper functions 
+# 2. Run entire file from top to bottom first. Then go back and run specific plots if necessary.
+# =====================
+
+# clear global environment, load data sets, source helper functions 
 rm(list=ls())
 source("./graphics_scripts/load_data.R")
 source("./graphics_scripts/helpers.R")
 source("./graphics_scripts/ggplot_graphics.R")
-source("./graphics_scripts/External MAGE Algorithms/cgmanalysis_manual_calc.R")
-source("./graphics_scripts/External MAGE Algorithms/cgmquantify_manual_calc.R")
-source("./graphics_scripts/External MAGE Algorithms/easygv_manual_calc.R")
+source("./graphics_scripts/external algorithms/cgmanalysis_manual_calc.R")
+source("./graphics_scripts/external algorithms/cgmquantify_manual_calc.R")
+source("./graphics_scripts/external algorithms/easygv_manual_calc.R")
 
 # 0. Preprocessing: split the data into helpful categories by sample index
 gap_sample_id <- sapply(1:length(cgm_all_data), function(x) ifelse(cgm_all_data[[x]]$gap == 1,x,NA)) 
