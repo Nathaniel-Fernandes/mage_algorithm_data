@@ -18,7 +18,7 @@ Only the data with the final results of the different algorithms is included due
 	- **pod_error_iglu**: calculates the error for V1 and V2 of the iglu MAGE algorithm on a given set of samples (indicated by sample indices) compared to manual calculations
 	- **mage_error**: calculates the error for an arbitrary algorithm compared to the manual calculations
 	- **optimize_ma:** Specifically for the V2 iglu MAGE algorithm. Returns a 38x38 matrix of the mean errors of the algorithm from the manual calculation
-4. Run the `/graphics_scripts/ggplot_graphics.R` file which contains the following functions
+4. Run the `/graphics_scripts/ggplot_graphics.R` file which contains the following functions. (Note: this function is very computationally intensive as the iglu V2 MAGE function is run approximately `38*38*46*0.5 = 33212` times.)
 	- **plot_heatmap**: plots a ggplot heatmap for the 38x38 matrix returned from the `optimize_ma` function
 	- **plot_boxplot**: plots a ggplot boxplot given a data frame where each column is a different box (e.g. a use case could be each cell is the error for a specific algorithm on a sample)
 	- **algorithm_errors**: constructs a data frame of errors for a given algorithm (?)
