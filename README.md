@@ -14,6 +14,12 @@ Only the data with the final results of the different algorithms is included due
 
 2. Run the `/graphics_scripts/load_data.R` function to properly extract the needed data.
 
+## How to Reproduce Manual Calculations
+**General Use:** To reproduce the manual calculations and plots, use the files in the plot_scripts folder. Each manual calculation dataset has an R script and a corresponding pdf of plots. 
+
+**File Specific Instructions**
+First obtain the raw data via [Awesome-CGM](https://github.com/irinagain/Awesome-CGM) as explained within each script. Once the raw data has been properly processed, each plot_scripts R script may be sourced to reproduce the plots showing the manual calculations. Within each script, the exact rows of data are subsetted as was done for the manual calculations. The outputs of the scripts may also be found directly under the plot_scripts/plots folder. The manual calculation for each dataset is shown in the title of the plot.
+
 ## R Packages Needed
 - [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html)
 - [iglu](https://cran.r-project.org/web/packages/iglu/index.html)
