@@ -65,10 +65,10 @@ mage_error <- function(pod, algo_calc, manual_calc, vector = FALSE) {
 #####
 ## Optimize MA lengths
 optimize_ma <- function(pod) {
-  structure <- rep(NaN, 38*38*length(pod));
-  expanded_array <- array(structure, c(38, 38, length(pod)))
-  
-  for(long in 2:38) {
+  structure <- rep(NaN, 30*30*length(pod));
+  expanded_array <- array(structure, c(30, 30, length(pod)))
+
+  for(long in 2:30) {
     for(short in 1:(long - 1)) {
       for(i in 1:length(pod)) {
         if(pod[i] != 0) {
@@ -77,8 +77,45 @@ optimize_ma <- function(pod) {
       }
     }
   }
-  
+
   rowMeans(expanded_array[,,], dims = 2, na.rm = TRUE) # collapse the array
+}
+
+optimize_ma2 <- function(pod) {
+  m <- matrix(NA, 30, 30)
+  
+  for(long in 2:30) {
+    for(short in 1:(long - 1)) {
+      m[short, long] <- pod_error_iglu(pod, short_ma = short, long_ma = long)
+    }
+  }
+  return(m)
+}
+
+
+# creates a df where each column is the error of a different algorithm
+make_boxplot_df <- function(sample_ids) {
+  iglu_v2_err <- pod_error_iglu(sample_ids, vector = TRUE)
+  
+  # iglu algorithm v1
+  iglu_v1_err <- pod_error_iglu(sample_ids, algo="iglu_v1", vector = TRUE)
+  
+  # cgmanalysis
+  cgmanalysis_err <- mage_error(sample_ids, cgmanalysis_mage_all, cgm_manual_calc, TRUE)
+  
+  # cgmquantify
+  cgmquantify_err <- mage_error(sample_ids, cgmquantify_mage, cgm_manual_calc, TRUE)
+  
+  easygv_err <- mage_error(sample_ids, easygv_mage, cgm_manual_calc, TRUE)
+  
+  l <- list("Iglu_v2" = iglu_v2_err,
+            "Iglu_v1" = iglu_v1_err,
+            "CGM_Analysis" = cgmanalysis_err,
+            "CGM_Quantify" = cgmquantify_err,
+            "Easy_GV" = easygv_err)
+  
+  df <- cbind.data.frame(lapply(l, function(x) c(x, rep(NA, times = length(sample_ids) - length(x)))))
+  return(df)
 }
 
 ## TO DO TEST 2 and FIND MIN ERROR IN POD
@@ -93,7 +130,7 @@ cross_val <- function(pod_list) {
   # 1. save the optimization for each pod
   pods_opt <- rep(list(), ln)
   for(i in 1:ln) {
-    pods_opt[[i]] <- find_min_poderror(optimize_ma(pod_list[[i]]))[1,]
+    pods_opt[[i]] <- find_min_poderror(optimize_ma2(pod_list[[i]]))[1,]
     #print(pods_opt)
   }
   
@@ -102,7 +139,7 @@ cross_val <- function(pod_list) {
   for(i in 1:ln) {
     for(j in 1:ln) {
       if(j != i) {
-        errors[count] <- pod_error_MA(pod_list[[i]],pods_opt[[j]]$x, pods_opt[[j]]$ind)
+        errors[count] <- pod_error_iglu(pod_list[[i]],short_ma = pods_opt[[j]]$short, long_ma = pods_opt[[j]]$long)
         count <- count + 1
       }
     }
@@ -116,7 +153,7 @@ cross_val <- function(pod_list) {
 find_min_poderror <- function(collapsed_arr) {
   sa <- stack(as.data.frame(collapsed_arr))
   sa$short <- rep(seq_len(nrow(collapsed_arr)), ncol(collapsed_arr))
-  sa$long <- rep(1:38, each = 38)
+  sa$long <- rep(1:30, each = 30)
   
   return(sa[with(sa,order(values)),])
 }
