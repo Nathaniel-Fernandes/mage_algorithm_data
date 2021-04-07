@@ -6,7 +6,7 @@ library(dplyr)
 plot_heatmap <- function(collapsed_err, title = "MAGE vs. Manual Calculations") {
   sa <- stack(as.data.frame(collapsed_err))
   sa$x <- rep(seq_len(nrow(collapsed_err)), ncol(collapsed_err))
-  sa$ind <- rep(1:30, each = 30)
+  sa$ind <- rep(1:38, each = 38)
 
   names(sa) <- c("Error", "Long", "Short")
   # sa <- sa %>%
@@ -40,9 +40,6 @@ plot_boxplot <- function(df, title = "Boxplot") {
   plot <- ggplot(df, aes(x = ind, y = values)) +
     geom_boxplot(outlier.colour="red", outlier.shape=8,
                  outlier.size=4) + geom_jitter(color = "blue", alpha=0.4) +
-    # stat_summary(fun=mean, colour="darkred", geom="point", 
-    #                        shape=18, size=3, show.legend=FALSE) + 
-    # geom_text(data = means, aes(label = values, y = values + 1)) +
     ggtitle(title) +
     labs(x = "Groups", y = "% Error")
 

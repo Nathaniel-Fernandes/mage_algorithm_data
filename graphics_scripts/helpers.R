@@ -65,14 +65,14 @@ mage_error <- function(pod, algo_calc, manual_calc, vector = FALSE) {
 #####
 ## Optimize MA lengths
 optimize_ma <- function(pod) {
-  structure <- rep(NaN, 30*30*length(pod));
-  expanded_array <- array(structure, c(30, 30, length(pod)))
+  structure <- rep(NaN, 38*38*length(pod));
+  expanded_array <- array(structure, c(38, 38, length(pod)))
 
-  for(long in 2:30) {
+  for(long in 2:38) {
     for(short in 1:(long - 1)) {
       for(i in 1:length(pod)) {
         if(pod[i] != 0) {
-          expanded_array[short, long, i] <- single_error_iglu(i, short_ma = short, long_ma = long)
+          expanded_array[short, long, i] <- single_error_iglu(pod[i], short_ma = short, long_ma = long)
         }
       }
     }
@@ -82,9 +82,9 @@ optimize_ma <- function(pod) {
 }
 
 optimize_ma2 <- function(pod) {
-  m <- matrix(NA, 30, 30)
+  m <- matrix(NA, 38, 38)
   
-  for(long in 2:30) {
+  for(long in 2:38) {
     for(short in 1:(long - 1)) {
       m[short, long] <- pod_error_iglu(pod, short_ma = short, long_ma = long)
     }
@@ -94,8 +94,8 @@ optimize_ma2 <- function(pod) {
 
 
 # creates a df where each column is the error of a different algorithm
-make_boxplot_df <- function(sample_ids) {
-  iglu_v2_err <- pod_error_iglu(sample_ids, vector = TRUE)
+make_boxplot_df <- function(sample_ids, short_ma, long_ma) {
+  iglu_v2_err <- pod_error_iglu(sample_ids, short_ma = short_ma, long_ma=long_ma, vector = TRUE)
   
   # iglu algorithm v1
   iglu_v1_err <- pod_error_iglu(sample_ids, algo="iglu_v1", vector = TRUE)
@@ -153,7 +153,7 @@ cross_val <- function(pod_list) {
 find_min_poderror <- function(collapsed_arr) {
   sa <- stack(as.data.frame(collapsed_arr))
   sa$short <- rep(seq_len(nrow(collapsed_arr)), ncol(collapsed_arr))
-  sa$long <- rep(1:30, each = 30)
+  sa$long <- rep(1:38, each = 38)
   
   return(sa[with(sa,order(values)),])
 }
