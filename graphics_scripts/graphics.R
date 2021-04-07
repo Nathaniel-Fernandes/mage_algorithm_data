@@ -27,7 +27,7 @@ ideal_sample_id <- base::setdiff(1:length(cgm_all_data), c(gap_sample_id, short_
 
 
 # 1. Plot the heat map for the optimization of moving average lengths
-# o <- optimize_ma(ideal_sample_id) # Very computationally expensive - saved result in .Rda file
+# o <- create_pem(ideal_sample_id) # Very computationally expensive - saved result in .Rda file
 load("./graphics_scripts/data/optimize_cgm_data.RDa")
 o <- optimize_cgm_data
 plot_heatmap(o)

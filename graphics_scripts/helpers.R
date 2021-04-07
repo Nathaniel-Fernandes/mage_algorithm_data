@@ -64,12 +64,12 @@ mage_error <- function(pod, algo_calc, manual_calc, vector = FALSE) {
 ### 2. Optimize the new Iglu function
 #####
 ## Optimize MA lengths
-optimize_ma <- function(pod) {
-  structure <- rep(NaN, 38*38*length(pod));
-  expanded_array <- array(structure, c(38, 38, length(pod)))
+optimize_ma <- function(pod, max_n = 38) {
+  structure <- rep(NaN, max_n*max_n*length(pod));
+  expanded_array <- array(structure, c(max_n, max_n, length(pod)))
 
-  for(long in 2:38) {
-    for(short in 1:(long - 1)) {
+  for(long in 16:max_n) {
+    for(short in 1:15) {
       for(i in 1:length(pod)) {
         if(pod[i] != 0) {
           expanded_array[short, long, i] <- single_error_iglu(pod[i], short_ma = short, long_ma = long)
@@ -81,11 +81,11 @@ optimize_ma <- function(pod) {
   rowMeans(expanded_array[,,], dims = 2, na.rm = TRUE) # collapse the array
 }
 
-optimize_ma2 <- function(pod) {
-  m <- matrix(NA, 38, 38)
+optimize_ma2 <- function(pod, max_n) {
+  m <- matrix(NA, max_n, max_n)
   
-  for(long in 2:38) {
-    for(short in 1:(long - 1)) {
+  for(long in 16:max_n) {
+    for(short in 1:15) {
       m[short, long] <- pod_error_iglu(pod, short_ma = short, long_ma = long)
     }
   }
