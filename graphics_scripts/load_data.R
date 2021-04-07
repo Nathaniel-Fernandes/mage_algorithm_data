@@ -52,26 +52,33 @@ Hall2018_data[[16]] <- c(Hall2018_df[8514:8745, ], manual=61   , gap=1, short=0,
 # JHU DATASET (comes with the iglu package)
 JHU_data <- list()
 
+# subject 1 in dataset
+JHU_data[[1]] <- c(example_data_5_subject[405:644, ], manual=46.75, gap=1, short=0, dtype=2, adult=1)
+
 # subject 2 in dataset
-JHU_data[[1]] <- c(example_data_5_subject[2994:3281, ], manual=70, gap=0, short=0, dtype=2, adult=1)
-JHU_data[[2]] <- c(example_data_5_subject[3282:3569, ], manual=81.33, gap=0, short=0, dtype=2, adult=1)
-JHU_data[[3]] <- c(example_data_5_subject[3570:3857, ], manual=154, gap=0, short=0, dtype=2, adult=1)
-JHU_data[[4]] <- c(example_data_5_subject[3858:4144, ], manual=71, gap=0, short=0, dtype=2, adult=1)
-JHU_data[[5]] <- c(example_data_5_subject[4145:4432, ], manual=95, gap=0, short=0, dtype=2, adult=1)
+JHU_data[[2]] <- c(example_data_5_subject[2994:3281, ], manual=70, gap=0, short=0, dtype=2, adult=1)
+JHU_data[[3]] <- c(example_data_5_subject[3282:3569, ], manual=81.33, gap=0, short=0, dtype=2, adult=1)
+JHU_data[[4]] <- c(example_data_5_subject[3570:3857, ], manual=154, gap=0, short=0, dtype=2, adult=1)
+JHU_data[[5]] <- c(example_data_5_subject[3858:4144, ], manual=71, gap=0, short=0, dtype=2, adult=1)
+JHU_data[[6]] <- c(example_data_5_subject[4145:4432, ], manual=95, gap=0, short=0, dtype=2, adult=1)
+
+# subject 3 in data set
+JHU_data[[7]] <- c(example_data_5_subject[5746:5842, ], manual=89, gap=0, short=1, dtype=2, adult=1) # microscopic gap
 
 # subject 4 in dataset
-JHU_data[[6]] <-  c(example_data_5_subject[7413:7698, ], manual=67, gap=0, short=0, dtype=2, adult=1)
-JHU_data[[7]] <-  c(example_data_5_subject[7699:7985, ], manual=57.5, gap=0, short=0, dtype=2, adult=1)
-JHU_data[[8]] <-  c(example_data_5_subject[7986:8273, ], manual=50, gap=0, short=0, dtype=2, adult=1)
-JHU_data[[9]] <-  c(example_data_5_subject[8274:8561, ], manual=41, gap=0, short=0, dtype=2, adult=1)
-JHU_data[[10]] <- c(example_data_5_subject[8562:8849, ], manual=31.83, gap=0, short=0, dtype=2, adult=1)
+JHU_data[[8]] <-  c(example_data_5_subject[7413:7698, ], manual=67, gap=0, short=0, dtype=2, adult=1)
+JHU_data[[9]] <-  c(example_data_5_subject[7699:7985, ], manual=57.5, gap=0, short=0, dtype=2, adult=1)
+JHU_data[[10]] <-  c(example_data_5_subject[7986:8273, ], manual=50, gap=0, short=0, dtype=2, adult=1)
+JHU_data[[11]] <-  c(example_data_5_subject[8274:8561, ], manual=41, gap=0, short=0, dtype=2, adult=1)
+JHU_data[[12]] <- c(example_data_5_subject[8562:8849, ], manual=31.83, gap=0, short=0, dtype=2, adult=1)
 
 # Subject 5 in dataset
-JHU_data[[11]] <- c(example_data_5_subject[11018:11301, ], manual=119.6, gap=0, short=0, dtype=2, adult=1) # has microscopic gap
-JHU_data[[12]] <- c(example_data_5_subject[11302:11588, ], manual=211, gap=0, short=0, dtype=2, adult=1) # has microscopic gap
-JHU_data[[13]] <- c(example_data_5_subject[11589:11830, ], manual=147, gap=1, short=0, dtype=2, adult=1) 
-JHU_data[[14]] <- c(example_data_5_subject[11831:12118, ], manual=125.25, gap=0, short=0, dtype=2, adult=1)
-JHU_data[[15]] <- c(example_data_5_subject[12119:12406, ], manual=226.5, gap=0, short=0, dtype=2, adult=1)
+JHU_data[[13]] <- c(example_data_5_subject[11018:11301, ], manual=119.6, gap=0, short=0, dtype=2, adult=1) # has microscopic gap
+JHU_data[[14]] <- c(example_data_5_subject[11302:11588, ], manual=211, gap=0, short=0, dtype=2, adult=1) # has microscopic gap
+JHU_data[[15]] <- c(example_data_5_subject[11589:11830, ], manual=147, gap=1, short=0, dtype=2, adult=1) 
+JHU_data[[16]] <- c(example_data_5_subject[11831:12118, ], manual=125.25, gap=0, short=0, dtype=2, adult=1)
+JHU_data[[17]] <- c(example_data_5_subject[12119:12406, ], manual=226.5, gap=0, short=0, dtype=2, adult=1)
+JHU_data[[18]] <- c(example_data_5_subject[12653:12940, ], manual=153, gap=0, short=0, dtype=2, adult=1)
 
 # TSALIKIAN DATASET
 Tsalikian2005_csv <- paste0(filepath, "Tsalikian2005_processed.csv")
