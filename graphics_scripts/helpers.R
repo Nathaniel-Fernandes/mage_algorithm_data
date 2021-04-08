@@ -64,7 +64,7 @@ mage_error <- function(pod, algo_calc, manual_calc, vector = FALSE) {
 ### 2. Optimize the new Iglu function
 #####
 ## Optimize MA lengths
-optimize_ma <- function(pod, max_n = 38) {
+create_pem <- function(pod, max_n = 38) {
   structure <- rep(NaN, max_n*max_n*length(pod));
   expanded_array <- array(structure, c(max_n, max_n, length(pod)))
 
@@ -81,7 +81,7 @@ optimize_ma <- function(pod, max_n = 38) {
   rowMeans(expanded_array[,,], dims = 2, na.rm = TRUE) # collapse the array
 }
 
-optimize_ma2 <- function(pod, max_n) {
+create_pem2 <- function(pod, max_n = 38) {
   m <- matrix(NA, max_n, max_n)
   
   for(long in 16:max_n) {
@@ -102,6 +102,7 @@ make_boxplot_df <- function(sample_ids, short_ma, long_ma) {
   
   # cgmanalysis
   cgmanalysis_err <- mage_error(sample_ids, cgmanalysis_mage_all, cgm_manual_calc, TRUE)
+  cgmanalysis_err_old <- mage_error(sample_ids,cgmanalysis_mage_old_all, cgm_manual_calc, TRUE)
   
   # cgmquantify
   cgmquantify_err <- mage_error(sample_ids, cgmquantify_mage, cgm_manual_calc, TRUE)
@@ -111,6 +112,7 @@ make_boxplot_df <- function(sample_ids, short_ma, long_ma) {
   l <- list("Iglu_v2" = iglu_v2_err,
             "Iglu_v1" = iglu_v1_err,
             "CGM_Analysis" = cgmanalysis_err,
+            "CGM_analysis Old" = cgmanalysis_err_old,
             "CGM_Quantify" = cgmquantify_err,
             "Easy_GV" = easygv_err)
   
@@ -119,8 +121,8 @@ make_boxplot_df <- function(sample_ids, short_ma, long_ma) {
 }
 
 ## TO DO TEST 2 and FIND MIN ERROR IN POD
-# View(find_min_poderror(optimize_MA(pod6)))
-cross_val <- function(pod_list) {
+# View(find_min_poderror(create_pem2(pod6)))
+cross_val <- function(pod_list, vector = FALSE) {
   ln <- length(pod_list)
   #print(ln)
   # 0. preallocate array
@@ -130,7 +132,7 @@ cross_val <- function(pod_list) {
   # 1. save the optimization for each pod
   pods_opt <- rep(list(), ln)
   for(i in 1:ln) {
-    pods_opt[[i]] <- find_min_poderror(optimize_ma2(pod_list[[i]]))[1,]
+    pods_opt[[i]] <- find_min_poderror(create_pem2(pod_list[[i]]))[1,]
     #print(pods_opt)
   }
   
@@ -145,7 +147,10 @@ cross_val <- function(pod_list) {
     }
   }
   
-  #print(errors)
+  if(vector == TRUE) {
+    return(errors)
+  }
+
   mean(errors)
 }
 
