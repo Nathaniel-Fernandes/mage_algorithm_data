@@ -10,10 +10,6 @@ for (i in 1:length(cgm_dataset_df_cp)) {
 }
 
 for (i in 1:length(cgm_dataset_df_cp)) {
-  # if(i == 40) {
-  #   next  # Data set 40 throws an error when used with cgmvariables so uncomment and skip it if you encounter an error
-  # }
-  
   write.csv(cgm_dataset_df_cp[[i]], paste0("./graphics_scripts/external algorithms/data/files/test", i, ".csv"))
 }
 

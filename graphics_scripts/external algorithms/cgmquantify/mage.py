@@ -7,7 +7,7 @@ output_df = pd.DataFrame(columns=columns)
 #print(output_df)
 
 # print(os.getcwd())
-# change the current working directory to "graphics_scripts/data/files"
+# change the current working directory to "graphics_scripts/external algorithms/data/files"
 for filename in os.listdir(os.getcwd()):
     print(filename, end=" ")
     # read in csv file

@@ -9,6 +9,7 @@ optimized_ma.RData
 *.xlsm
 !cgmquantify_output.csv
 !cgmanalysis data.csv
+!cgmanalysis data (v2.7).csv
 !EasyGV.xlsx
 *.png
 *.jpg
