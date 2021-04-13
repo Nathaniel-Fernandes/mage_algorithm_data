@@ -1,5 +1,7 @@
 # To compare the difference between MAGE+ and MAGE-
 
+# NOTE: the current mage function in the iglu package on GitHub does not have the ability to calculate mage+/-
+
 mage_plus <- sapply(cgm_dataset_df, function(x) mage(x$gl, type="plus")$MAGE)
 
 mage_minus <- sapply(cgm_dataset_df, function(x) mage(x$gl, type="minus")$MAGE)

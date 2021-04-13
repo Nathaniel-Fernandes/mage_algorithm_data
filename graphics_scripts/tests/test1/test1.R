@@ -2,14 +2,13 @@
 
 # 1. Do 6-fold cross-validation to estimate algorithm accuracy on unseen data
 load('./graphics_scripts/tests/test1/cv_errors.Rda')
-ps <- pod_split(1:length(cgm_dataset_df), 6, seed = 200)
+#ps <- pod_split(1:length(cgm_dataset_df), 6, seed = 200)
 #cv_errors <- cross_val(ps, vector = TRUE) # expensive
-mean(cv_errors) # 10.03% 
-
 #save(cv_errors, file="./graphics_scripts/tests/test1/cv_errors.Rda")
 
-# 2. Find best short/long moving average pair
+mean(cv_errors) # 10.03% 
 
+# 2. Find best short/long moving average pair
 load('./graphics_scripts/tests/test1/pem_all.Rda')
 # pem_all <- create_pem2(1:length(cgm_dataset_df)) # expensive
 #save(pem_all, file="./graphics_scripts/tests/test1/pem_all.Rda")

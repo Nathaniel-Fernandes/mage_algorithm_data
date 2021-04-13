@@ -1,13 +1,18 @@
+if(!require(dplyr)) install.packages("dplyr")
 library(dplyr)
 
-# remove na values from vector
+# In this file, we randomly split the samples into 2 groups. Then, we find the best short/long MA length on one data set and test the error on the other data set (and vice versa)
+
+
+# 0. Preprocess the data
+# a. remove na values from vector
 cgm_adults <- cgm_adults[!is.na(cgm_adults)]
 cgm_children <- cgm_children[!is.na(cgm_children)]
 cgm_type_1 <- cgm_type_1[!is.na(cgm_type_1)]
 cgm_type_2 <- cgm_type_2[!is.na(cgm_type_2)]
 cgm_type_healthy <- cgm_type_healthy[!is.na(cgm_type_healthy)]
 
-# Randomly split into 2 groups
+# b. Randomly split into 2 groups
 set.seed(200)
 
 exclude <- vector()
@@ -32,11 +37,10 @@ exclude <- append(exclude, cgm_type_healthy)
 g1_adult <- sample(setdiff(cgm_adults, exclude), size=(floor(length(cgm_adults)/2)-length(intersect(group1, cgm_adults))))
 group1 <- append(group1, g1_adult)
 
-group2 <- base::setdiff(1:46, group1)
+group2 <- base::setdiff(1:length(cgm_dataset_df), group1)
 
-# Half and half
-errors_df_g1 <- make_boxplot_df(group1, short_ma=5, long_ma=32)
-colnames(errors_df_g1)
+# c. create data frames from the two groups
+errors_df_g1 <- make_boxplot_df(group1, short_ma=5, long_ma=32) # 5 & 32 are used b/c they are experimentally the best values from test1.R
 errors_df_g2 <- make_boxplot_df(group2, short_ma=5, long_ma=32)
 errors_df_g2 <- errors_df_g2 %>% 
   rename(
@@ -50,37 +54,35 @@ errors_df_g2 <- errors_df_g2 %>%
 df <- merge(errors_df_g1, errors_df_g2, by=0) %>% 
   select(-Row.names)
 
-# plot_boxplot(errors_df_g1, "Group 1 Errors")
+# Data Analysis
+# 1. Compare the Errors between Groups Visually
 plot_boxplot(df, "Algorithms vs Manual on 2 Random Groups (5, 32))")
 
-# Data analysis
 sd_err_g1 <- sapply(errors_df_g1, sd, na.rm=TRUE)
 summary_err_g1 <- sapply(errors_df_g1, summary)
 
 sd_err_g2 <- sapply(errors_df_g2, sd, na.rm=TRUE)
 summary_err_g2 <- sapply(errors_df_g2, summary)
 
-# o_1 <- create_pem2(1:46)
-load('./graphics_scripts/tests/test2/optimize_group1.Rda')
-o_g1 <- create_pem2(group1)
-plot_heatmap(o_g1)
-pod_error_iglu(group1, short_ma=4, long_ma=30) # Error 13.61
+# 2. Estimate accuracy of algorithm on unseen data
+# ie. find best short/long MA pair on one group and test error on other group
 
-# o_g2 <- create_pem2(group2)
-plot_heatmap(o_g2)
-pod_error_iglu(group2, short_ma=17, long_ma = 20) # Error: 11.56
+## create "percent error matrices"
+# pem_g1 <- create_pem2(group1) 
+# pem_g2 <- create_pem2(group2)
 
+# save(pem_g1, file="./graphics_scripts/tests/test2/pem_g1.Rda")
+# save(pem_g2, file="./graphics_scripts/tests/test2/pem_g2.Rda")
 
-# save(o_g1, file='./graphics_scripts/tests/test2/optimize_group1.Rda')
-# save(o_g2, file='./graphics_scripts/tests/test2/optimize_group2.Rda')
-# 
-# save(cross_validation_error, file="./graphics_scripts/tests/test1/cross_validation_error.Rda")
-# 
-# save(errors_df_g1, file="./graphics_scripts/tests/test2/errors.Rda")
-# save(sd_err_g1, file="./graphics_scripts/tests/test2/sd_error.Rda")
-# save(summary_err_g1, file="./graphics_scripts/tests/test2/summary_err.Rda")
-# 
-# save(errors_df_g2, file="./graphics_scripts/tests/test2/errors.Rda")
-# save(sd_err_g2, file="./graphics_scripts/tests/test2/sd_error.Rda")
-# save(summary_err_g2, file="./graphics_scripts/tests/test2/summary_err.Rda")
+load('./graphics_scripts/tests/test2/pem_g1.Rda')
+load('./graphics_scripts/tests/test2/pem_g2.Rda')
 
+plot_heatmap(pem_g1)
+plot_heatmap(pem_g2)
+
+best_ma_g1 <- find_min_poderror(pem_g1)[1,]
+best_ma_g2 <- find_min_poderror(pem_g2)[1,]
+
+pod_error_iglu(group1, short_ma=best_ma_g2$short, long_ma=best_ma_g2$long) # Error 13.61
+
+pod_error_iglu(group2, short_ma=best_ma_g1$short, long_ma=best_ma_g1$long) # Error 13.61
