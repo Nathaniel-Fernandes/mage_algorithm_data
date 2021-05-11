@@ -61,9 +61,9 @@ mage_error <- function(pod, algo_calc, manual_calc, vector = FALSE) {
   mean(percent_err, na.rm = TRUE)
 }
 
-### 2. Optimize the new Iglu function
-#####
-## Optimize MA lengths
+### 2. Optimize MA lengths
+# both will return the same value w/ about same efficiency. Created two to debug an issue and did not want to delete working code for no reason!
+
 create_pem <- function(pod, max_n = 38) {
   structure <- rep(NaN, max_n*max_n*length(pod));
   expanded_array <- array(structure, c(max_n, max_n, length(pod)))
@@ -80,7 +80,6 @@ create_pem <- function(pod, max_n = 38) {
 
   rowMeans(expanded_array[,,], dims = 2, na.rm = TRUE) # collapse the array
 }
-
 create_pem2 <- function(pod, max_n = 38) {
   m <- matrix(NA, max_n, max_n)
   
@@ -91,7 +90,6 @@ create_pem2 <- function(pod, max_n = 38) {
   }
   return(m)
 }
-
 
 # creates a df where each column is the error of a different algorithm
 make_boxplot_df <- function(sample_ids, short_ma, long_ma) {
@@ -121,19 +119,16 @@ make_boxplot_df <- function(sample_ids, short_ma, long_ma) {
 }
 
 ## TO DO TEST 2 and FIND MIN ERROR IN POD
-# View(find_min_poderror(create_pem2(pod6)))
 cross_val <- function(pod_list, vector = FALSE) {
   ln <- length(pod_list)
-  #print(ln)
+  
   # 0. preallocate array
   errors <- numeric(ln * (ln - 1))
-  #print(errors)
   
   # 1. save the optimization for each pod
   pods_opt <- rep(list(), ln)
   for(i in 1:ln) {
     pods_opt[[i]] <- find_min_poderror(create_pem2(pod_list[[i]]))[1,]
-    #print(pods_opt)
   }
   
   # 2. For each pod do the leave one out and append error

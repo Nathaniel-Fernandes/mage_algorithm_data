@@ -9,9 +9,7 @@ plot_heatmap <- function(collapsed_err, title = "MAGE vs. Manual Calculations") 
   sa$ind <- rep(1:38, each = 38)
 
   names(sa) <- c("Error", "Long", "Short")
-  # sa <- sa %>%
-  #   mutate(Error = Error)
-
+  
   plot <- ggplot(sa, aes(x = `Long`, y = `Short`, fill = `Error`)) +
     geom_tile() +
     scale_fill_gradient(limits = c(0,31), low="blue", high="white",
@@ -45,3 +43,4 @@ plot_boxplot <- function(df, title = "Boxplot") {
 
   return(plot)
 }
+
