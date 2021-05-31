@@ -11,7 +11,6 @@ library("xlsx")
 
 manual_calc <- read.xlsx("./graphics_scripts/data/manual_calculations.xlsx", 1)
 
-
 # Create file names for data
 filepath = "./graphics_scripts/data/"
 Dubosson2018_csv <- paste0(filepath, "Dubosson2018_processed.csv")
@@ -25,9 +24,11 @@ Tsalikian2005 <- read.csv(Tsalikian2005_csv, header = TRUE)
 JHU <- example_data_5_subject
 
 # 2. Combine all data into "master" store
-cgm_all_data <- lapply(1:length(manual_calc$data.set), function(x) { 
-  as.list(manual_calc[x, ])
+# exclude the designated ones
+cgm_all_data <- lapply(1:length(manual_calc$data.set), function(x) {
+    as.list(manual_calc[x, ])
 })
+cgm_all_data <- Filter(function(x) is.na(x$comment) || x$comment != "exclude", cgm_all_data)
 
 cgm_dataset_df <- lapply(cgm_all_data, function(x) {
   dataset <- x$data.set
