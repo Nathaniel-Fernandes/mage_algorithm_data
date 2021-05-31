@@ -43,4 +43,3 @@ plot_boxplot <- function(df, title = "Boxplot") {
 
   return(plot)
 }
-
