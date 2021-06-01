@@ -99,7 +99,7 @@ make_boxplot_df <- function(sample_ids, short_ma, long_ma) {
   iglu_v1_err <- pod_error_iglu(sample_ids, algo="iglu_v1", vector = TRUE)
   
   # cgmanalysis
-  cgmanalysis_err <- mage_error(sample_ids, cgmanalysis_mage_all, cgm_manual_calc, TRUE)
+  cgmanalysis_err <- mage_error(sample_ids, cgmanalysis_mage, cgm_manual_calc, TRUE)
   cgmanalysis_err_old <- mage_error(sample_ids,cgmanalysis_mage_old_all, cgm_manual_calc, TRUE)
   
   # cgmquantify
