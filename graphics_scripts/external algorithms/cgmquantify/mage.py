@@ -1,12 +1,13 @@
 import os
 import pandas as pd
 from cgmquantify import MAGE, MGE
+import re
 
 columns = ["num", "name", "mage"]
 output_df = pd.DataFrame(columns=columns)
 #print(output_df)
 
-# print(os.getcwd())
+print(os.listdir(os.getcwd()))
 # change the current working directory to "graphics_scripts/external algorithms/data/files"
 for filename in os.listdir(os.getcwd()):
     print(filename, end=" ")
@@ -24,9 +25,8 @@ for filename in os.listdir(os.getcwd()):
     data['Glucose'] = pd.to_numeric(df['sensorglucose'])
 
     mage_data = MAGE(data)
-    # mge_data = MGE(data)
-    # print(mage_data, mge_data)
-    num = int(filename.split(".")[0][4:])
+
+    num = int(re.findall('[0-9]+', filename)[0])
 
     output_df.loc[len(output_df)] = [num, filename,mage_data]
 
