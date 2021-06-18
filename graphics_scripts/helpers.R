@@ -2,7 +2,7 @@
 # Author: Nathaniel Fernandes
 # Date: March 1, 2021
 
-## 1. Calculate the Error for an Algorithm on a Data set(s)
+## 1. Percent Error on a single sample (IGLU)
 # error calculation for new and old iglu
 # @parameter sample_index The index in the list of cgm data for the dataset
 # @param algo Whether to use the version 1 or 2 of the iglu mage algorithm
@@ -22,9 +22,9 @@ single_error_iglu <- function(sample_index, algo = c('iglu_v2', 'iglu_v1'), ...)
   return(percent_err)
 }
 
-# Error on a vector of sample indexes
-# @param pod A numeric vector of sample indexes
-# @param vector Wheter to return a vector of errors for each sample index or the mean
+# 2. Percent Error on a vector of sample indices (IGLU)
+# @param pod A numeric vector of sample indices
+# @param vector Whether to return a vector of errors for each sample index or the mean
 # @param ... Any other parameters to pass to "single_error_iglu"
 pod_error_iglu <- function(pod, vector = FALSE, algo = c('iglu_v2', 'iglu_v1'), ...) {
   
@@ -48,7 +48,11 @@ pod_error_iglu <- function(pod, vector = FALSE, algo = c('iglu_v2', 'iglu_v1'), 
   mean(percent_err, na.rm = T)
 }
 
-# Error for an arbitrary algorithm - input the indexes in pod, the calculations for algorithm, and the manual calc
+# 3. Percent Error on arbitrary algorithm (ANY)
+# @param pod A vector of sample indices
+# @param algo_calc The algorithm's MAGE calculation on a sample of CGM data
+# @param manual_calc The manual MAGE calculation on a sample of CGM data
+# @param vector Boolean. True = return vector of % error. False = return mean of % errors
 mage_error <- function(pod, algo_calc, manual_calc, vector = FALSE) {
   err <- (algo_calc[pod] - manual_calc[pod]) / manual_calc[pod]
   
@@ -61,7 +65,7 @@ mage_error <- function(pod, algo_calc, manual_calc, vector = FALSE) {
   mean(percent_err, na.rm = TRUE)
 }
 
-### 2. Optimize MA lengths
+# 3. Optimize MA lengths
 # both will return the same value w/ about same efficiency. Created two to debug an issue and did not want to delete working code for no reason!
 
 create_pem <- function(pod, max_n = 38) {

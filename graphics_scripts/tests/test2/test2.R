@@ -66,7 +66,7 @@ summary_err_g2 <- sapply(errors_df_g2, summary)
 
 #d. algorithm error on all plots
 errors_df <- make_boxplot_df(1:50, short_ma=5, long_ma=32)
-
+plot_boxplot(errors_df)
 # 2. Estimate accuracy of algorithm on unseen data
 # ie. find best short/long MA pair on one group and test error on other group
 

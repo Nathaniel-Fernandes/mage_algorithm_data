@@ -9,6 +9,7 @@ if(!require(xlsx)) install.packages("xlsx")
 library(iglu)
 library("xlsx")
 
+# 2. Read in the manual calculations data into a df
 manual_calc <- read.xlsx("./graphics_scripts/data/manual_calculations.xlsx", 1)
 
 # Create file names for data
@@ -23,19 +24,21 @@ Hall2018 <- read.csv(Hall2018_csv, header = TRUE)
 Tsalikian2005 <- read.csv(Tsalikian2005_csv, header = TRUE)
 JHU <- example_data_5_subject
 
-# 2. Combine all data into "master" store
-# exclude the designated ones
+# 3. Combine all the data into "master" store
+
+# 3.1 exclude the samples where the comment is "exclude"
 cgm_all_data <- lapply(1:length(manual_calc$data.set), function(x) {
     as.list(manual_calc[x, ])
 })
 cgm_all_data <- Filter(function(x) is.na(x$comment) || x$comment != "exclude", cgm_all_data)
 
+# 3.2 Subset the complete data sets by the row numbers found in the manual calculations
 cgm_dataset_df <- lapply(cgm_all_data, function(x) {
   dataset <- x$data.set
-  eval(parse(text=dataset))[x$start:x$end, ]
+  eval(parse(text=dataset))[x$start:x$end, ] # evaluate the text
 })
 
-# Extract the needed data to make future calculations easier
+# 4. Split the samples into meaningful groups by recording the index of the sample
 cgm_manual_calc <- sapply(cgm_all_data, function(x) x$manual) # get manual calculations
 cgm_gap_days <- sapply(1:length(cgm_all_data), function(i) ifelse(cgm_all_data[[i]]$gap==1,i,NA))
 cgm_short_days <- sapply(1:length(cgm_all_data), function(i) ifelse(cgm_all_data[[i]]$short==1,i, NA))
