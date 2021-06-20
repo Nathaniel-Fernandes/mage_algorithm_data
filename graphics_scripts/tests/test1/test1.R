@@ -1,7 +1,7 @@
 # This file contains a baseline test. All 45 samples are used to cross validate and select the best long and short moving average
 
 # 1. Do 5-fold cross-validation to estimate algorithm accuracy on unseen data
-# load('./graphics_scripts/tests/test1/cv_errors.Rda')
+load('./graphics_scripts/tests/test1/cv_errors.Rda')
 ps <- pod_split(1:length(cgm_dataset_df), 5, seed = 200)
 cv_errors <- cross_val(ps, vector = TRUE) # expensive
 save(cv_errors, file="./graphics_scripts/tests/test1/cv_errors.Rda")
