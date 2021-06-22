@@ -8,7 +8,7 @@ library(cgmanalysis)
 cgmvariables("./graphics_scripts/external algorithms/data/files/", "./graphics_scripts/external algorithms/data/", outputname = "cgmanalysis results")
 
 
-# 2. Load Completed Data Analysis from CSV
+# 2. Load Results from CSV
 
 cgmanalysis_data <- read.csv('./graphics_scripts/external algorithms/data/cgmanalysis results.csv')
 cgmanalysis_mage <- cgmanalysis_data$r_mage

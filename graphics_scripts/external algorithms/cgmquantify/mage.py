@@ -1,18 +1,21 @@
 import os
 import pandas as pd
-from cgmquantify import MAGE, MGE
+from cgmquantify import MAGE
 import re
 
 columns = ["num", "name", "mage"]
 output_df = pd.DataFrame(columns=columns)
-#print(output_df)
 
-print(os.listdir(os.getcwd()))
+#print(output_df)
+#print(os.listdir(os.getcwd() + "/../data/files/"))
+path = os.getcwd() + "/../data/files/"
+
 # change the current working directory to "graphics_scripts/external algorithms/data/files"
-for filename in os.listdir(os.getcwd()):
-    print(filename, end=" ")
+for filename in os.listdir(path):
+    #print(filename, end=" ")
     # read in csv file
-    df = pd.read_csv(filename)
+    
+    df = pd.read_csv(path+filename)
 
     data = pd.DataFrame(df)
 
@@ -30,6 +33,7 @@ for filename in os.listdir(os.getcwd()):
 
     output_df.loc[len(output_df)] = [num, filename,mage_data]
 
-print(output_df)
 output_df.sort_values(by=['num'], inplace=True)
-output_df.to_csv(os.getcwd() + "/../cgmquantify_output.csv", index=False)
+print(output_df)
+
+output_df.to_csv(os.getcwd() + "/../data/cgmquantify results.csv", index=False)

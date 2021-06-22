@@ -3,10 +3,10 @@
 # Date: February 15, 2021
 
 # 1. Require necessary packages
-if (!require(iglu)) install.packages('iglu')
-if(!require(xlsx)) install.packages("xlsx")
+if (!require("iglu")) install.packages('iglu')
+if(!require("xlsx")) install.packages("xlsx")
 
-library(iglu)
+library("iglu")
 library("xlsx")
 
 # 2. Read in the manual calculations data into a df
@@ -38,8 +38,9 @@ cgm_dataset_df <- lapply(cgm_all_data, function(x) {
   eval(parse(text=dataset))[x$start:x$end, ] # evaluate the text
 })
 
-# 4. Split the samples into meaningful groups by recording the index of the sample
 cgm_manual_calc <- sapply(cgm_all_data, function(x) x$manual) # get manual calculations
+
+# 4. Split the samples into meaningful groups by recording the index of the sample
 cgm_gap_days <- sapply(1:length(cgm_all_data), function(i) ifelse(cgm_all_data[[i]]$gap==1,i,NA))
 cgm_short_days <- sapply(1:length(cgm_all_data), function(i) ifelse(cgm_all_data[[i]]$short==1,i, NA))
 cgm_adults <- sapply(1:length(cgm_all_data), function(i) ifelse(cgm_all_data[[i]]$adult==1,i,NA))
