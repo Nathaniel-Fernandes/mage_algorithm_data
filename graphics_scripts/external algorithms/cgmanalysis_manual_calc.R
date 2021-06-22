@@ -5,7 +5,7 @@ library(cgmanalysis)
 # 1. Complete Data Analysis from Scratch
 
 # This function from cgmanalysis calculates mage for the cgmdata in files in the input directory
-cgmvariables("./graphics_scripts/external algorithms/data/files/", "./graphics_scripts/external algorithms/data/", outputname = "cgmanalysis results")
+#cgmvariables("./graphics_scripts/external algorithms/data/files/", "./graphics_scripts/external algorithms/data/", outputname = "cgmanalysis results")
 
 
 # 2. Load Results from CSV

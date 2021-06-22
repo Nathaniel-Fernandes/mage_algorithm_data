@@ -156,6 +156,10 @@ cross_val2 <- function(pod_list, vector = FALSE) {
     pod_error_iglu(pod_list[[i]],short_ma=optimal_params[[x]]$short, long_ma = optimal_params[[x]]$long)
   })
   
+  if(vector) {
+    return(errors)
+  }
+  
   mean(errors)
 }
 

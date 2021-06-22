@@ -71,11 +71,11 @@ plot_boxplot(errors_df)
 # ie. find best short/long MA pair on one group and test error on other group
 
 ## create "percent error matrices"
-# pem_g1 <- create_pem2(group1) 
-# pem_g2 <- create_pem2(group2)
+pem_g1 <- create_pem2(group1) 
+pem_g2 <- create_pem2(group2)
 
-# save(pem_g1, file="./graphics_scripts/tests/test2/pem_g1.Rda")
-# save(pem_g2, file="./graphics_scripts/tests/test2/pem_g2.Rda")
+save(pem_g1, file="./graphics_scripts/tests/test2/pem_g1.Rda")
+save(pem_g2, file="./graphics_scripts/tests/test2/pem_g2.Rda")
 
 load('./graphics_scripts/tests/test2/pem_g1.Rda')
 load('./graphics_scripts/tests/test2/pem_g2.Rda')
@@ -86,6 +86,6 @@ plot_heatmap(pem_g2)
 best_ma_g1 <- find_min_poderror(pem_g1)[1,]
 best_ma_g2 <- find_min_poderror(pem_g2)[1,]
 
-pod_error_iglu(group1, short_ma=best_ma_g2$short, long_ma=best_ma_g2$long) # Error 13.61
+pod_error_iglu(group1, short_ma=best_ma_g2$short, long_ma=best_ma_g2$long) # Error 7.80
 
-pod_error_iglu(group2, short_ma=best_ma_g1$short, long_ma=best_ma_g1$long) # Error 13.61
+pod_error_iglu(group2, short_ma=best_ma_g1$short, long_ma=best_ma_g1$long) # Error 11.80
