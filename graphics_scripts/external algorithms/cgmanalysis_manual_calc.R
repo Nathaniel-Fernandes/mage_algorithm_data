@@ -1,17 +1,15 @@
-# calculate the manual calculations for other algorithms
+# 0. include R package cgmanalysis
 if(!require(cgmanalysis)) install.packages('cgmanalysis')
 library(cgmanalysis)
 
-# Function from cgmanalysis that calculates mage on the files in the input directory
-#cgmvariables("./graphics_scripts/external algorithms/data/files/", "./graphics_scripts/external algorithms/data/", outputname = "cgmanalysis data")
+# 1. Complete Data Analysis from Scratch
 
-cgmanalysis_data <- read.csv('./graphics_scripts/external algorithms/data/cgmanalysis data.csv')
+# This function from cgmanalysis calculates mage for the cgmdata in files in the input directory
+cgmvariables("./graphics_scripts/external algorithms/data/files/", "./graphics_scripts/external algorithms/data/", outputname = "cgmanalysis results")
 
+
+# 2. Load Completed Data Analysis from CSV
+
+cgmanalysis_data <- read.csv('./graphics_scripts/external algorithms/data/cgmanalysis results.csv')
 cgmanalysis_mage <- cgmanalysis_data$r_mage
 
-# Old cgmanalysis data
-# cgmanalysis_data_old <- read.csv('./graphics_scripts/external algorithms/data/cgmanalysis data (v2.7).csv')
-# 
-# cgmanalysis_mage_old <- cgmanalysis_data_old$r_mage
-# cgmanalysis_mage_old_all <- c(cgmanalysis_mage_old[1:42], NaN, cgmanalysis_mage_old[43:length(cgmanalysis_mage_old)]) # insert NaN in index 43 because it throws an error
-# 
