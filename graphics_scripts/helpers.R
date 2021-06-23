@@ -162,39 +162,3 @@ cross_val2 <- function(pod_list, vector = FALSE) {
   
   mean(errors)
 }
-
-#5. TO DO TEST 2 and FIND MIN ERROR IN POD
-cross_val <- function(pod_list, vector = FALSE) {
-  ln <- length(pod_list)
-  
-  # 0. preallocate array
-  errors <- numeric(ln)
-  temp_indices <- 1:ln
-  
-  # 1. save the optimization for each pod
-  pods_opt <- rep(list(), ln)
-  for(i in 1:ln) {
-    print(paste(i, "start"))
-    sample_indices <- unlist(pod_list[temp_indices[-c(i)]])
-    pods_opt[[i]] <- find_min_poderror(create_pem(sample_indices))[1,]
-    print(paste(i, "end"))
-  }
-  
-  # 2. For each pod do the leave one out and append error
-  count <- 1
-  for(i in 1:ln) {
-    for(j in 1:ln) {
-      if(j != i) {
-        errors[count] <- pod_error_iglu(pod_list[[i]],short_ma = pods_opt[[j]]$short, long_ma = pods_opt[[j]]$long)
-        count <- count + 1
-      }
-    }
-  }
-  
-  if(vector == TRUE) {
-    return(errors)
-  }
-
-  mean(errors)
-}
-
