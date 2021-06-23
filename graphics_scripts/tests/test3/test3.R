@@ -1,5 +1,7 @@
 # Separate into normal, short, gaps
 
+# 6/22/2021 - This file has not been run yet so the # are not updated
+
 # preprocess data
 cgm_gap_days <- cgm_gap_days[!is.na(cgm_gap_days)]
 cgm_short_days <- cgm_short_days[!is.na(cgm_short_days)]
