@@ -2,7 +2,7 @@
 # Author: Nathaniel Fernandes
 # Date: March 1, 2021
 
-## 1. Percent Error on a single sample (IGLU V1/2)
+# 1. Percent Error on a single sample (IGLU V1/2)
 # @parameter sample_index The index in the list of cgm data for the dataset
 # @param algo Whether to use the version 1 or 2 of the iglu mage algorithm
 # @param ... Any additional parameters to pass to iglu::mage (see documentation)
@@ -115,18 +115,26 @@ create_pem2 <- function(pod, max_n = 38) {
   return(m)
 }
 
-cross_val2 <- function(pod_list, vector = FALSE) {
-  ln <- length(pod_list)
-  total_ln <- length(unlist(pod_list))
+# 5. Cross Validate IGLU V2
+# Perform an n-fold cross validation, where n is the length(pod_list)
+
+cross_val <- function(pod_list, vector = FALSE) {
+  ln <- length(pod_list) # number of pods to determine n in n-fold cross val
   
-  pods_opt <- list()
-  
-  for(i in 1:total_ln) {
-    pods_opt[[i]] <- create_pem2(i)
-  }
-  
+  total_ln <- length(unlist(pod_list)) # the total # of samples
   indices <- 1:total_ln
   min_error <- list()
+  
+  # OPTIMIZATION TRICK
+  # calculate the percent error matrix for each sample individually so you can just
+  # sum the required ones at the end. This eliminates the need to recalculate the PEM of
+  # sample 3 (for example) in every fold.
+  pem_list <- list()
+  for(i in 1:total_ln) {
+    pem_list[[i]] <- create_pem2(i)
+  }
+  
+
   for(i in 1:ln) {
     # The purpose of this loop is to find the short/long that yields the MINIMUM error 
     # on all the training samples not in sample i, so can test error of that combo
@@ -134,25 +142,27 @@ cross_val2 <- function(pod_list, vector = FALSE) {
     
     # 1. Pt. 1
     # pod_list[[i]] contains indices of the randomly split samples 
-    # indices contains ALL sample indices (1 to total_ln)
+    # `indices` contains ALL sample indices (1 to total_ln)
     # THUS: indices[-pod_list[[i]] selects all sample indices NOT in the testing sample i
     
     # 2. Pt. 2
-    # pods_opt[i] contains the "percent error matrices" for each sample i (i in 1:total_ln) 
-    # pods_opt[vector of indices] will subset the list to return the desired indices
+    # pem_list[i] contains the "percent error matrices" for each sample i (i in 1:total_ln) 
+    # pem_list[vector of indices] will subset the list to return a list w/ the PEM of the desired indices
     # THUS: Reduce(`+`, list of nXn matrices) will sum all the selected indices
     
     # 3. Result
     # min_error is a list with length ln (i.e. 5 for 5-fold cross val), and will contain the
-    # sums of the PEMs (percent error matrices) for all training samples NOT in training group i
-    min_error[[i]] <- Reduce(`+`, pods_opt[indices[-pod_list[[i]]]])
+    # sums of the PEMs (percent error matrices) for all training samples NOT in testing group i
+    min_error[[i]] <- Reduce(`+`, pem_list[indices[-pod_list[[i]]]])
   }
   
+  # for each sample, find the short & long moving average lengths that yields the lowest error on the training PEM
   optimal_params <- lapply(min_error, function(x) { 
         find_min_poderror(x)[1,]
-    })
+  })
   
-  errors<- sapply(1:ln, function(x) {
+  # calculate the mean error on each pod `i` where the short & long moving averages are given by the "optimal" parameters
+  errors <- sapply(1:ln, function(x) {
     pod_error_iglu(pod_list[[i]],short_ma=optimal_params[[x]]$short, long_ma = optimal_params[[x]]$long)
   })
   
