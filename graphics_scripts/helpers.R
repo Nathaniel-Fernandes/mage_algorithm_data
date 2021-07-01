@@ -118,7 +118,7 @@ create_pem2 <- function(pod, max_n = 38) {
 # 5. Cross Validate IGLU V2
 # Perform an n-fold cross validation, where n is the length(pod_list)
 
-cross_val <- function(pod_list, vector = FALSE) {
+cross_val <- function(pod_list, vector = FALSE, return_pem=FALSE) {
   ln <- length(pod_list) # number of pods to determine n in n-fold cross val
   
   total_ln <- length(unlist(pod_list)) # the total # of samples
@@ -166,7 +166,11 @@ cross_val <- function(pod_list, vector = FALSE) {
     pod_error_iglu(pod_list[[i]],short_ma=optimal_params[[x]]$short, long_ma = optimal_params[[x]]$long)
   })
   
-  if(vector) {
+  if(return_pem == TRUE) {
+    return(min_error)
+  }
+  
+  if(vector == TRUE) {
     return(errors)
   }
   

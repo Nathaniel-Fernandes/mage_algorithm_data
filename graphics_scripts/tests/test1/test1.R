@@ -40,7 +40,7 @@ mean(all_errors)
 # 7.585036
 
 quantile(all_errors)
-
+summary(all_errors)
 # 0%        25%       50%       75%      100% 
 # 4.851490  6.869470  7.688021  8.230413 11.649731 
 
