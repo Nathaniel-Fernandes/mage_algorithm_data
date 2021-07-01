@@ -23,6 +23,8 @@ mean(cv_errors)
 
 load('./graphics_scripts/tests/test1/pem_all.Rda')
 
+library(ggplot2)
+
 plot_heatmap(pem_all) # Can visualize results
 best_ma <- find_min_poderror(pem_all)[1,]
 
