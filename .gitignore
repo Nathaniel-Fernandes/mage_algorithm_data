@@ -7,8 +7,8 @@ optimized_ma.RData
 *.csv
 *.xlsx
 *.xlsm
-!cgmquantify_output.csv
+!cgmquantify results.csv
 !cgmanalysis results.csv
-!EasyGV.xlsx
+!EasyGV results.xlsx
 *.png
 *.jpg
