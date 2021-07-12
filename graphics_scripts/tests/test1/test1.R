@@ -4,6 +4,8 @@
 #   3. Calculate 5 # summary on algorithms error for all parameters
 #   4. Compare the accuracy of all the algorithms on all samples
 
+source("./graphics_scripts/graphics.R") # loads data & helper functions
+
 # 1. Do 5-fold cross-validation to estimate algorithm accuracy on unseen data
 
 #ps <- pod_split(1:length(cgm_dataset_df), 5, seed = 200)
@@ -22,8 +24,6 @@ mean(cv_errors)
 #save(pem_all, file="./graphics_scripts/tests/test1/pem_all.Rda")
 
 load('./graphics_scripts/tests/test1/pem_all.Rda')
-
-library(ggplot2)
 
 plot_heatmap(pem_all) # Can visualize results
 best_ma <- find_min_poderror(pem_all)[1,]

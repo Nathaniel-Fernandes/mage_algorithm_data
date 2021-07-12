@@ -1,6 +1,8 @@
 # Separate into normal, short, gaps
 
-# 6/22/2021 - This file has not been run yet so the # are not updated
+# 7/12/2021 - This file has not been run yet so the # are not updated
+
+# source("./graphics_scripts/graphics.R") # Source this file to load data & helper functions!
 
 # preprocess data
 cgm_gap_days <- cgm_gap_days[!is.na(cgm_gap_days)]
