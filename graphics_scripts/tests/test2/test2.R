@@ -70,7 +70,7 @@ sd_err_g2 <- sapply(errors_df_g2, sd, na.rm=TRUE)
 summary_err_g2 <- sapply(errors_df_g2, summary)
 
 #d. algorithm error on all plots
-errors_df <- make_boxplot_df(1:50, short_ma=5, long_ma=32)
+errors_df <- make_boxplot_df(1:length(cgm_dataset_df), short_ma=5, long_ma=32)
 plot_boxplot(errors_df)
 
 # 2. Estimate the unbiased accuracy of IGLU V2
