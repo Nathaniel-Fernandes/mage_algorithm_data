@@ -4,7 +4,8 @@
 
 if(!require(dplyr)) install.packages("dplyr")
 library(dplyr)
-# source("./graphics_scripts/graphics.R") # Source this file to load data & helper functions!
+
+source("./graphics_scripts/graphics.R") # Source this file to load data & helper functions!
 
 # 0. Preprocess the data
 # a. remove na values from vector

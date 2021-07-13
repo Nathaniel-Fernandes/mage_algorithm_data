@@ -1,6 +1,6 @@
 # This is to see the time
 
-# source("./graphics_scripts/graphics.R") # Source this file to load data & helper functions!
+source("./graphics_scripts/graphics.R") # Source this file to load data & helper functions!
 
 cgm_dataset_df
 

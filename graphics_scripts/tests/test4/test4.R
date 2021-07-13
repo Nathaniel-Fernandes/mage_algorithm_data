@@ -1,6 +1,8 @@
 # In this file, we compare the difference between MAGE+ and MAGE-. We expect the correlation
 # to be moderate as Baghurst asserts that MAGE+ and MAGE- often do not correlate well
 
+source("./graphics_scripts/graphics.R") # Source this file to load data & helper functions!
+
 # 1. A low correlation of 0.44 when include ALL samples, however this is probably due to a couple outliers
 # (see below)
 mage_plus <- sapply(cgm_dataset_df, function(x) mage(x$gl, type="plus")$MAGE)
