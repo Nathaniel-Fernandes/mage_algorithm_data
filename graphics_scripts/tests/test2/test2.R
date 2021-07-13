@@ -80,11 +80,11 @@ plot_boxplot(errors_df)
 # pem_g1 <- create_pem2(group1)
 # pem_g2 <- create_pem2(group2)
 
-save(pem_g1, file="./graphics_scripts/tests/test2/pem_g1.Rda")
-save(pem_g2, file="./graphics_scripts/tests/test2/pem_g2.Rda")
+# save(pem_g1, file="./graphics_scripts/tests/test2/pem_g1a.Rda")
+# save(pem_g2, file="./graphics_scripts/tests/test2/pem_g2a.Rda")
 
-# load('./graphics_scripts/tests/test2/pem_g1.Rda')
-# load('./graphics_scripts/tests/test2/pem_g2.Rda')
+load('./graphics_scripts/tests/test2/pem_g1a.Rda')
+load('./graphics_scripts/tests/test2/pem_g2a.Rda')
 
 plot_heatmap(pem_g1)
 plot_heatmap(pem_g2)
