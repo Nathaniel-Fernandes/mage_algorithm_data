@@ -4,13 +4,17 @@
 
 # 1. Require necessary packages
 if (!require("iglu")) install.packages('iglu')
-if(!require("xlsx")) install.packages("xlsx")
+#if(!require("xlsx")) install.packages("xlsx")
 
 library("iglu")
-library("xlsx")
+#library("xlsx")
+
+library("readxl")
 
 # 2. Read in the manual calculations data into a df
-manual_calc <- read.xlsx("./graphics_scripts/data/manual_calculations.xlsx", 1)
+# manual_calc <- read.xlsx("./graphics_scripts/data/manual_calculations.xlsx", 1)
+
+manual_calc <- read_excel("./graphics_scripts/data/manual_calculations.xlsx")
 
 # Create file names for data
 filepath = "./graphics_scripts/data/"
@@ -27,14 +31,14 @@ JHU <- example_data_5_subject
 # 3. Combine all the data into "master" store
 
 # 3.1 exclude the samples where the comment is "exclude"
-cgm_all_data <- lapply(1:length(manual_calc$data.set), function(x) {
+cgm_all_data <- lapply(1:length(manual_calc$dataset), function(x) {
     as.list(manual_calc[x, ])
 })
 cgm_all_data <- Filter(function(x) is.na(x$comment) || x$comment != "exclude", cgm_all_data)
 
 # 3.2 Subset the complete data sets by the row numbers found in the manual calculations
 cgm_dataset_df <- lapply(cgm_all_data, function(x) {
-  dataset <- x$data.set
+  dataset <- x$dataset
   eval(parse(text=dataset))[x$start:x$end, ] # evaluate the text
 })
 
