@@ -15,7 +15,7 @@ plot_heatmap <- function(collapsed_err, title = "MAGE vs. Manual Calculations", 
     scale_fill_gradient(limits = c(low, high), low="blue", high="white",
                         oob = scales::squish, na.value = "grey") +
     ggtitle(title) +
-    labs(x = "Long Moving Average Window Size \u03B2", y = "Short Moving Average Window Size \u03B1", fill = "% Error") +
+    labs(x = expression("Long Moving Average Window Size"~beta), y = expression("Short Moving Average Window Size"~alpha), fill = "% Error") +
     ylim(c(0, 16)) +
     xlim(c(16, 38))
 
