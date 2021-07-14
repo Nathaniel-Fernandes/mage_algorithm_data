@@ -3,7 +3,7 @@ library(dplyr)
 
 ######################
 ## Graphics - HEATMAP
-plot_heatmap <- function(collapsed_err, title = "MAGE vs. Manual Calculations") {
+plot_heatmap <- function(collapsed_err, title = "MAGE vs. Manual Calculations", low = 0, high = 31) {
   sa <- stack(as.data.frame(collapsed_err))
   sa$x <- rep(seq_len(nrow(collapsed_err)), ncol(collapsed_err))
   sa$ind <- rep(1:38, each = 38)
@@ -12,12 +12,12 @@ plot_heatmap <- function(collapsed_err, title = "MAGE vs. Manual Calculations") 
   
   plot <- ggplot(sa, aes(x = `Long`, y = `Short`, fill = `Error`)) +
     geom_tile() +
-    scale_fill_gradient(limits = c(0,31), low="blue", high="white",
+    scale_fill_gradient(limits = c(low, high), low="blue", high="white",
                         oob = scales::squish, na.value = "grey") +
     ggtitle(title) +
-    labs(x="Long Moving Average (MA)", y="Short MA", fill="% Error") +
-    ylim(c(0,16)) +
-    xlim(c(16,38))
+    labs(x = "Long Moving Average Window Size", y = "Short Moving Average Window Size", fill = "% Error") +
+    ylim(c(0, 16)) +
+    xlim(c(16, 38))
 
   return(plot)
 }
