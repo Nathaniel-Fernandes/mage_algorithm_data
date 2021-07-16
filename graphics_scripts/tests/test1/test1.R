@@ -15,7 +15,7 @@ source("./graphics_scripts/graphics.R") # loads data & helper functions
 load('./graphics_scripts/tests/test1/cv_errors.Rda')
 
 mean(cv_errors) 
-# 9.00% 
+# 5.82% 
 
 
 # 2. Find best short/long moving average pair over all 45 samples
