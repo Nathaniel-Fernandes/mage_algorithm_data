@@ -127,7 +127,7 @@ cross_val <- function(pod_list, vector = FALSE, return_pem=FALSE) {
   
   total_ln <- length(unlist(pod_list)) # the total # of samples
   indices <- 1:total_ln
-  min_error <- list()
+  pem_sums <- list()
   
   # OPTIMIZATION TRICK
   # calculate the percent error matrix for each sample individually so you can just
@@ -138,7 +138,6 @@ cross_val <- function(pod_list, vector = FALSE, return_pem=FALSE) {
     pem_list[[i]] <- create_pem2(i)
   }
   
-
   for(i in 1:ln) {
     # The purpose of this loop is to find the short/long that yields the MINIMUM error 
     # on all the training samples not in sample i, so can test error of that combo
@@ -147,7 +146,7 @@ cross_val <- function(pod_list, vector = FALSE, return_pem=FALSE) {
     # 1. Pt. 1
     # pod_list[[i]] contains indices of the randomly split samples 
     # `indices` contains ALL sample indices (1 to total_ln)
-    # THUS: indices[-pod_list[[i]] selects all sample indices NOT in the testing sample i
+    # THUS: indices[-pod_list[[i]]] selects all sample indices NOT in the testing sample i
     
     # 2. Pt. 2
     # pem_list[i] contains the "percent error matrices" for each sample i (i in 1:total_ln) 
@@ -157,17 +156,17 @@ cross_val <- function(pod_list, vector = FALSE, return_pem=FALSE) {
     # 3. Result
     # min_error is a list with length ln (i.e. 5 for 5-fold cross val), and will contain the
     # sums of the PEMs (percent error matrices) for all training samples NOT in testing group i
-    min_error[[i]] <- Reduce(`+`, pem_list[indices[-pod_list[[i]]]])
+    pem_sums[[i]] <- Reduce(`+`, pem_list[indices[-pod_list[[i]]]])
   }
   
   # for each sample, find the short & long moving average lengths that yields the lowest error on the training PEM
-  optimal_params <- lapply(min_error, function(x) { 
+  optimal_params <- lapply(pem_sums, function(x) { 
         find_min_poderror(x)[1,]
   })
   
   # calculate the mean error on each pod `i` where the short & long moving averages are given by the "optimal" parameters
   errors <- sapply(1:ln, function(x) {
-    pod_error_iglu(pod_list[[i]],short_ma=optimal_params[[x]]$short, long_ma = optimal_params[[x]]$long)
+    pod_error_iglu(pod_list[[x]],short_ma=optimal_params[[x]]$short, long_ma = optimal_params[[x]]$long)
   })
   
   if(return_pem == TRUE) {
