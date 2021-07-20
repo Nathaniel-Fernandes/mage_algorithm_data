@@ -7,15 +7,15 @@
 # @param algo Whether to use the version 1 or 2 of the iglu mage algorithm
 # @param ... Any additional parameters to pass to iglu::mage (see documentation)
 
-single_error_iglu <- function(sample_index, algo = c('iglu_v2', 'iglu_v1'), ...) {
+single_error_iglu <- function(sample_index, algo = c('iglu_ma', 'iglu_naive'), ...) {
   algo = match.arg(algo)
   percent_err <- NULL
   
-  if(algo == 'iglu_v2') {
+  if(algo == 'iglu_ma') {
     err <- iglu::mage(cgm_dataset_df[[sample_index]], ...)$MAGE / cgm_manual_calc[sample_index] - 1
   }
-  else if(algo == 'iglu_v1') {
-    err <- iglu::mage(cgm_dataset_df[[sample_index]], 'v1', ...)$MAGE / cgm_manual_calc[sample_index] - 1
+  else if(algo == 'iglu_naive') {
+    err <- iglu::mage(cgm_dataset_df[[sample_index]], 'naive', ...)$MAGE / cgm_manual_calc[sample_index] - 1
   }
   
   percent_err <- abs(err * 100)
@@ -28,17 +28,17 @@ single_error_iglu <- function(sample_index, algo = c('iglu_v2', 'iglu_v1'), ...)
 # @param vector Whether to return a vector of errors for each sample index or the mean
 # @param ... Any other parameters to pass to "single_error_iglu"
 
-pod_error_iglu <- function(pod, vector = FALSE, algo = c('iglu_v2', 'iglu_v1'), ...) {
+pod_error_iglu <- function(pod, vector = FALSE, algo = c('iglu_ma', 'iglu_naive'), ...) {
   
   algo = match.arg(algo)
   percent_err <- NULL
   err <- NULL
   
-  if(algo == 'iglu_v2') {
+  if(algo == 'iglu_ma') {
     err <- sapply(cgm_dataset_df[pod], function(x) iglu::mage(x, ...)$MAGE) / cgm_manual_calc[pod] - 1
   }
-  else if(algo == 'iglu_v1') {
-    err <- sapply(cgm_dataset_df[pod], function(x) iglu::mage(x, 'v1', ...)$MAGE) / cgm_manual_calc[pod] - 1
+  else if(algo == 'iglu_naive') {
+    err <- sapply(cgm_dataset_df[pod], function(x) iglu::mage(x, 'naive', ...)$MAGE) / cgm_manual_calc[pod] - 1
   }
 
   percent_err <- abs(err) * 100
