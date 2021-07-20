@@ -1,6 +1,6 @@
-# Script to reproduce plots for Hall(2018) subject 1636-69-001 manual MAGE
+# Script to reproduce plots for Hall(2018)  manual MAGE
 # Author: Elizabeth Chun
-# Date: February 1st, 2021
+# Date: February 1st, 2021; edited July 20th, 2021
 
 # This dataset comes from a publically available CGM dataset. Both the link to the original
 # download site and a preprocessor script can be found through our Awesome-CGM GitHub
@@ -25,18 +25,31 @@ plot_data[[2]] <- datafile[245:531, ]
 plot_data[[3]] <- datafile[532:754, ]
 plot_data[[4]] <- datafile[755:849, ]
 plot_data[[5]] <- datafile[849:1101, ]
+plot_data[[6]] <- datafile[1102:1379, ]
+plot_data[[7]] <- datafile[1380:1666, ]
+plot_data[[8]] <- datafile[1667:1846, ]
+plot_data[[9]] <- datafile[1847:2124, ]
+plot_data[[10]] <- datafile[2125:2303, ]
+plot_data[[11]] <- datafile[2304:2585, ]
 
 # Name dataset, dates, and manual mage values 
-dataset <- "Hall2018_subject1636-69-001"
-dates <- c("2-3-2014", "2-4-2014", "2-5-2014", "3-29-2015", "3-30-2015")
-manual_mage <- c(30.6, 106.6, 83, 91, 57.67)
+dataset <- "Hall2018"
+subjects = c()
+dates <- rep(as.Date(plot_data[[1]]$time[1]), length(plot_data))
+for (i in 1:length(plot_data)) {
+  subjects[i] <- unique(plot_data[[i]]$id)
+  dates[i] <- as.Date(plot_data[[i]]$time[1])
+}
+
+manual_mage <- c(31, 107, 83, 91, 58, 51, 57, 34, 53, 65, 47)
 
 # Save plots to pdf
 figure.path <- "plot_scripts/plots/"
 pdf(file = paste0(figure.path, dataset, ".pdf", sep = ""),
     width = 10, height = 5, onefile = TRUE)
 for (i in 1:length(plot_data)) {
-  p = plot_glu(plot_data[[i]]) + ggtitle(paste0("Manual MAGE: ", manual_mage[i], " (",
+  p = plot_glu(plot_data[[i]]) + ggtitle(paste0("Manual MAGE: ", manual_mage[i], 
+                                                " (", subjects[i], ", ",
                                                 dates[i], ")", sep = ""))
   print(p)
 }
