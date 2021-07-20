@@ -12,8 +12,10 @@ pdf(file = paste0(figure.path, "gap.pdf"), width = 10, height = 5)
 print(p2)
 dev.off()
 
-# after run test1.R
-p3 = plot_heatmap(pem_all)
+# after run test1.R (load results from test1)
+source("./graphics_scripts/ggplot_graphics.R")
+load('./graphics_scripts/tests/test1/pem_all.Rda')
+p3 = plot_heatmap(pem_all, low = 4, high = 12)
 pdf(file = paste0(figure.path, "heatmap_percent_error.pdf"), width = 10, height = 5)
 print(p3)
 dev.off()
