@@ -21,6 +21,7 @@ mean(cv_errors)
 # 2. Find best short/long moving average pair over all 45 samples
 
 #pem_all <- create_pem2(1:length(cgm_dataset_df)) # expensive
+pem_all_median <- create_pem2(1:length(cgm_dataset_df), calculate_mean = FALSE)
 #save(pem_all, file="./graphics_scripts/tests/test1/pem_all.Rda")
 
 load('./graphics_scripts/tests/test1/pem_all.Rda')
