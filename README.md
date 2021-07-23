@@ -17,7 +17,13 @@ By using this data, you consent to the following User Agreements.
 > 
 > In addition, the T1D Exchange should be notified via email (publicdatasetuse@t1dexchange.org) when a manuscript (send title) or abstract (send title and name of meeting) reports T1D Exchange data or analyses of the data. Please provide notification at the time of submission and again at time of acceptance.
 
-## Access 
+## How to Access Manual Calculations
+We selected 51 days from the above data sets and manually calculated MAGE. We had to exclude 6 samples due to large gaps (5) or insufficient data (1).
+
+You can find plots of the 45 manual calculations (and the code to generate them) in the `plot_scripts` folder.
+
+You can find the calculated MAGE value along with other information about each sample in the `graphics_scripts/data/manual calculations.xlsx` file. **DO NOT MODIFY** this file since the analysis scripts below require the information to be in a certain order.
+
 
 ## How to Reproduce Results & Graphics
 1. 
