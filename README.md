@@ -1,16 +1,33 @@
 # MAGE
-This repository holds the intuition, implementation, and code to reproduce graphics and results in the associated paper: [Link to be added].
+The goal of our work is to “Design an open-source algorithm that calculates MAGE more accurately than existing algorithms and enables easy exploration of the data through a visual display”. This repository holds the intuition, implementation, and code to reproduce graphics and results in the associated paper: [Link to be added].  
 
-## How to Reproduce Graphics & Results
+More specifically, you can find:
+1. 4 CGM data sets from the T1D Exchange
+2. 51 manual MAGE calculations (6 were excluded from analyses)
+3. Functions used to evaluate and analyze the MAGE algorithms: iglu_ma (proposed), [iglu_naive](https://cran.r-project.org/web/packages/iglu/index.html), [cgmquantify v0.5](https://github.com/brinnaebent/cgmquantify), [EasyGV Excel workbook (3/11/2021)](https://www.phc.ox.ac.uk/research/technology-outputs/easygv), and [cgmanalysis v2.7.2](https://cran.r-project.org/web/packages/cgmanalysis/index.html)
+4. Functions used to generate the publication-quality graphics
+
+## How to Access CGM Data Sets
+We used the data sets Hall (2018), Tsalikian (2005), Dubosson (2018), and JHU originally found on [Awesome-CGM](https://github.com/irinagain/Awesome-CGM). The pre-processed data is included in this repository in the `graphics_scripts/data/` folder.
+
+By using this data, you consent to the following User Agreements.
+> Use of the T1D Exchange publicly-available data requires that you include the following attribution and disclaimer in any publication, presentation or communication resulting from use of these data:
+> 
+> The source of the data is the T1D Exchange, but the analyses, content and conclusions presented herein are solely the responsibility of the authors and have not been reviewed or approved by the T1D Exchange.
+> 
+> In addition, the T1D Exchange should be notified via email (publicdatasetuse@t1dexchange.org) when a manuscript (send title) or abstract (send title and name of meeting) reports T1D Exchange data or analyses of the data. Please provide notification at the time of submission and again at time of acceptance.
+
+## Access 
+
+## How to Reproduce Results & Graphics
+1. 
 **General Use:** Open the file `/graphics_scripts/graphics.R` in R Studio and run it. All the necessary R files and functions will be sourced automatically, and plots will be generated. To view a specific plot, please source the entire `graphics.R` file first, then run the function to create the desired plot (e.g. `plot_heatmap` or `plot_boxplot`).
 
 Only the data with the final results of the different algorithms is included due to privacy concerns - follow the instructions below to start with the initial data and run every function on your own.
 
 **Specific Instructions**
 1. Obtain the following publicly available data sets from [Awesome-CGM](https://github.com/irinagain/Awesome-CGM) and run their respective preprocessor scripts (which can be found with the data sets). Put the resulting csv files in the `/graphics_scripts/data/` folder **with the names given below**:
-	- Hall (2018) => "Hall2018_processed.csv"
-	- Tsalikian (2005) => "Tsalikian2005_processed.csv"
-	- Dubosson (2018) => "Dubosson2018_processed.csv"
+	
 
 2. Run the `/graphics_scripts/load_data.R` file to properly extract the needed data.
 
