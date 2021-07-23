@@ -8,8 +8,8 @@ source("./graphics_scripts/graphics.R") # loads data & helper functions
 
 # 1. Do 5-fold cross-validation to estimate algorithm accuracy on unseen data
 
-# ps <- pod_split(1:length(cgm_dataset_df), 5, seed = 200)
-# cv_errors <- cross_val(ps, vector = TRUE) # expensive (~20 minutes)
+ps <- pod_split(1:length(cgm_dataset_df), 5, seed = 200)
+cv_errors <- cross_val(ps, vector = TRUE) # expensive (~20 minutes)
 # save(cv_errors, file="./graphics_scripts/tests/test1/cv_errors.Rda")
 
 load('./graphics_scripts/tests/test1/cv_errors.Rda')
@@ -54,3 +54,4 @@ plot_boxplot(errors_df, "Algorithm Comparison vs Manual (5, 32)")
 
 sd_err <- sapply(errors_df, sd, na.rm=TRUE)
 summary_err <- sapply(errors_df, summary)
+

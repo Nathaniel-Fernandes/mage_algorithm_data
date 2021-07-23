@@ -52,7 +52,7 @@ make_boxplot_df <- function(sample_ids, short_ma, long_ma) {
   iglu_v2_err <- pod_error_iglu(sample_ids, short_ma = short_ma, long_ma=long_ma, vector = TRUE)
   
   # iglu algorithm v1
-  iglu_v1_err <- pod_error_iglu(sample_ids, algo="iglu_v1", vector = TRUE)
+  iglu_v1_err <- pod_error_iglu(sample_ids, algo="iglu_naive", vector = TRUE)
   
   # cgmanalysis
   cgmanalysis_err <- mage_error(sample_ids, cgmanalysis_mage, cgm_manual_calc, TRUE)
@@ -62,8 +62,8 @@ make_boxplot_df <- function(sample_ids, short_ma, long_ma) {
   
   easygv_err <- mage_error(sample_ids, easygv_mage, cgm_manual_calc, TRUE)
   
-  l <- list("Iglu_v2" = iglu_v2_err,
-            "Iglu_v1" = iglu_v1_err,
+  l <- list("Iglu_ma" = iglu_v2_err,
+            "Iglu_naive" = iglu_v1_err,
             "CGM_Analysis" = cgmanalysis_err,
             "CGM_Quantify" = cgmquantify_err,
             "Easy_GV" = easygv_err)

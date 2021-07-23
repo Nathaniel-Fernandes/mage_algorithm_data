@@ -25,3 +25,4 @@ cor(cgm_manual_calc, sapply(cgm_dataset_df, function(x) { iglu::mage(x, "naive")
 cor(cgm_manual_calc, cgmanalysis_mage, use="pairwise.complete.obs")
 cor(cgm_manual_calc, cgmquantify_mage)
 cor(cgm_manual_calc, easygv_mage)
+

@@ -97,7 +97,7 @@ best_ma_g2
 
 
 # First group: Error 7.80%
-pod_error_iglu(group1, short_ma=best_ma_g2$short, long_ma=best_ma_g2$long) 
+pod_error_iglu(group1, vector=TRUE, short_ma=best_ma_g2$short, long_ma=best_ma_g2$long) 
 
 # Second Group: Error 11.80%
 pod_error_iglu(group2, short_ma=best_ma_g1$short, long_ma=best_ma_g1$long) 

@@ -165,7 +165,7 @@ cross_val <- function(pod_list, vector = FALSE, return_pem=FALSE) {
   
   # calculate the mean error on each pod `i` where the short & long moving averages are given by the "optimal" parameters
   errors <- sapply(1:ln, function(x) {
-    pod_error_iglu(pod_list[[x]],short_ma=optimal_params[[x]]$short, long_ma = optimal_params[[x]]$long)
+    pod_error_iglu(pod_list[[x]],short_ma=optimal_params[[x]]$short, long_ma = optimal_params[[x]]$long, vector=TRUE)
   })
   
   if(return_pem == TRUE) {
