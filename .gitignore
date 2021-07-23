@@ -4,11 +4,5 @@
 .RData
 .Ruserdata
 optimized_ma.RData
-*.csv
-*.xlsx
-*.xlsm
-!cgmquantify results.csv
-!cgmanalysis results.csv
-!EasyGV results.xlsx
 *.png
 *.jpg
