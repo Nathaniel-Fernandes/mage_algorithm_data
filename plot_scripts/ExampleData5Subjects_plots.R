@@ -1,13 +1,18 @@
 # Script to reproduce plots for Broll 2021 manual MAGE
 # Author: Elizabeth Chun
-# Date: February 14th, 2021
+# Date: February 14th, 2021, edited July 24th, 2021
 
 # This data comes from one of the publically available datasets that comes with the
-# R package iglu. Therefore we can simply load the iglu package
-# We also load the ggplot2 package to create the pdf plot
+# R package iglu. Therefore we could simply load the iglu package
 if (!require(iglu)) install.packages('iglu')
-if (!require(ggplot2)) install.packages('ggplot2')
 library(iglu)
+
+# Alternatively, the data is also available in this repository labeled 
+# ExampleData5Subjects.csv and can be loaded from that file by uncommenting the
+# following code:
+# example_data_5_subject <- read.csv("data/ExampleData5Subjects.csv")
+
+if (!require(ggplot2)) install.packages('ggplot2')
 library(ggplot2)
 
 # Subset the data exactly as was manually done
@@ -32,7 +37,7 @@ plot_data[[17]] <- example_data_5_subject[12119:12406, ]
 plot_data[[18]] <- example_data_5_subject[12653:12940, ]
 
 # Name dataset, dates, and manual mage values 
-dataset <- "Broll2021"
+dataset <- "ExampleData5Subjects"
 
 subjects = c()
 dates <- rep(as.Date(plot_data[[1]]$time[1]), length(plot_data))

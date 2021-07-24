@@ -1,6 +1,9 @@
 # Script to reproduce plots for Dubosson (2018) subjects 1 and 2 manual MAGE
 # Author: Elizabeth Chun
-# Date: February 2nd, 2021; edited July 20th, 2021
+# Date: February 2nd, 2021; edited July 24th, 2021
+
+# All data can be found in the data/ folder of this repository. This
+# script is for the dataset titled Dubosson2018
 
 # This dataset comes from a publically available CGM dataset. Both the link to the original
 # download site and a preprocessor script can be found through our Awesome-CGM GitHub
@@ -9,7 +12,7 @@
 # processed data can now be used.
 
 # Load in processed data
-file <- "Dubosson2018_processed.csv"
+file <- "data/Dubosson2018_processed.csv"
 datafile <- read.csv(file, header = TRUE)
 
 # load/install required packages

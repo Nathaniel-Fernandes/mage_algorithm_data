@@ -1,6 +1,9 @@
 # Script to reproduce plots for Tsalikian (2005) manual MAGE
 # Author: Elizabeth Chun
-# Date: February 2nd, 2021; edited July 20th, 2021
+# Date: February 2nd, 2021; edited July 24th, 2021
+
+# All data can be found in the data/ folder of this repository. This
+# script is for the dataset titled Tsalikian2005
 
 # This dataset comes from a publically available CGM dataset. Both the link to the original
 # download site and a preprocessor script can be found through our Awesome-CGM GitHub
@@ -9,7 +12,7 @@
 # processed data can now be used.
 
 # Load in processed data
-file <- "Tsalikian2005_processed.csv"
+file <- "data/Tsalikian2005_processed.csv"
 datafile <- read.csv(file, header = TRUE)
 
 # load/install required packages
