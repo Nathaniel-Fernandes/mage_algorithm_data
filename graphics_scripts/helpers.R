@@ -107,12 +107,13 @@ create_pem <- function(pod, max_n = 38) {
     
   rowMeans(expanded_array[,,], dims = 2, na.rm = TRUE) # collapse the array
 }
-create_pem2 <- function(pod, max_n = 38, calculate_mean = TRUE) {
+
+create_pem2 <- function(pod, max_n = 38) {
   m <- matrix(NA, max_n, max_n)
   
   for(long in 16:max_n) {
     for(short in 1:15) {
-      m[short, long] <- pod_error_iglu(pod, short_ma = short, long_ma = long, calculate_mean = calculate_mean)
+      m[short, long] <- pod_error_iglu(pod, short_ma = short, long_ma = long)
     }
   }
   return(m)
