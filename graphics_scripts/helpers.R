@@ -27,7 +27,7 @@ single_error_iglu <- function(sample_index, algo = c('iglu_ma', 'iglu_naive'), .
 # @param pod A numeric vector of sample indices
 # @param vector Whether to return a vector of errors for each sample index or the mean
 # @param ... Any other parameters to pass to "single_error_iglu"
-pod_error_iglu <- function(pod, vector = FALSE, algo = c('iglu_ma', 'iglu_naive'), ...) {
+pod_error_iglu <- function(pod, vector = FALSE, algo = c('iglu_ma', 'iglu_naive'), calculate_mean = TRUE, ...) {
   
   algo = match.arg(algo)
   percent_err <- NULL
@@ -48,7 +48,7 @@ pod_error_iglu <- function(pod, vector = FALSE, algo = c('iglu_ma', 'iglu_naive'
   
   if (calculate_mean){
     mean(percent_err, na.rm = T)
-  }else{
+  } else{
     median(percent_err, na.rm = T)
   }
 }
@@ -107,12 +107,13 @@ create_pem <- function(pod, max_n = 38) {
     
   rowMeans(expanded_array[,,], dims = 2, na.rm = TRUE) # collapse the array
 }
-create_pem2 <- function(pod, max_n = 38, calculate_mean = TRUE) {
+
+create_pem2 <- function(pod, max_n = 38) {
   m <- matrix(NA, max_n, max_n)
   
   for(long in 16:max_n) {
     for(short in 1:15) {
-      m[short, long] <- pod_error_iglu(pod, short_ma = short, long_ma = long, calculate_mean = calculate_mean)
+      m[short, long] <- pod_error_iglu(pod, short_ma = short, long_ma = long)
     }
   }
   return(m)

@@ -4,29 +4,27 @@
 
 # 1. Require necessary packages
 if (!require("iglu")) install.packages('iglu')
-#if(!require("xlsx")) install.packages("xlsx")
+if (!require("readxl")) install.packages("readxl")
 
 library("iglu")
-#library("xlsx")
-
 library("readxl")
 
 # 2. Read in the manual calculations data into a df
-# manual_calc <- read.xlsx("./graphics_scripts/data/manual_calculations.xlsx", 1)
-
-manual_calc <- read_excel("./graphics_scripts/data/manual_calculations.xlsx")
+manual_calc <- read_excel("data/manual_calculations.xlsx")
 
 # Create file names for data
-filepath = "./graphics_scripts/data/"
+filepath = "data/"
 Dubosson2018_csv <- paste0(filepath, "Dubosson2018_processed.csv")
 Hall2018_csv <- paste0(filepath, "Hall2018_processed.csv")
 Tsalikian2005_csv <- paste0(filepath, "Tsalikian2005_processed.csv")
+JHU_csv <- paste0(filepath, "ExampleData5Subjects.csv")
 
 # Read in datasets
 Dubosson2018 <- read.csv(Dubosson2018_csv, header = TRUE)
 Hall2018 <- read.csv(Hall2018_csv, header = TRUE)
 Tsalikian2005 <- read.csv(Tsalikian2005_csv, header = TRUE)
-JHU <- example_data_5_subject
+# JHU <- example_data_5_subject
+JHU <- read.csv(JHU_csv, header=TRUE)
 
 # 3. Combine all the data into "master" store
 
