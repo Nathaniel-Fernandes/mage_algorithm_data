@@ -8,7 +8,7 @@ More specifically, you can find:
 4. Functions used to generate the publication-quality graphics
 
 ## How to Access CGM Data Sets
-We used the data sets Hall (2018), Tsalikian (2005), Dubosson (2018), and JHU originally found on [Awesome-CGM](https://github.com/irinagain/Awesome-CGM). The pre-processed data is included in this repository in the `graphics_scripts/data/` folder.
+We used the data sets Hall (2018), Tsalikian (2005), Dubosson (2018), and JHU originally found on [Awesome-CGM](https://github.com/irinagain/Awesome-CGM). The pre-processed data is included in this repository in the `data/` folder.
 
 By using this data, you consent to the following User Agreements.
 > Use of the T1D Exchange publicly-available data requires that you include the following attribution and disclaimer in any publication, presentation or communication resulting from use of these data:
@@ -22,37 +22,27 @@ We selected 51 days from the above data sets and manually calculated MAGE. We ha
 
 You can find plots of the 45 manual calculations (and the code to generate them) in the `plot_scripts` folder.
 
-You can find the calculated MAGE value along with other information about each sample in the `graphics_scripts/data/manual calculations.xlsx` file. **DO NOT MODIFY** this file since the analysis scripts below require the information to be in a certain order.
+You can find the calculated MAGE value along with other information about each sample in the `data/manual calculations.xlsx` file. **DO NOT MODIFY** this file since the analysis scripts below require the information to be accurate and in a certain order.
 
+## Data Analysis
+1. Generating the MAGE calculations for the 5 Algorithms
+We compare the proposed algorithm against three other MAGE algorithms: [EasyGV Excel workbook (3/11/2021)](https://www.phc.ox.ac.uk/research/technology-outputs/easygv), and [cgmanalysis v2.7.2](https://cran.r-project.org/web/packages/cgmanalysis/index.html). We ran each of these algorithms on the CGM data corresponding to the manual calculations and placed the results in the `/graphics_scripts/external algorithms/` folder.
 
-## How to Reproduce Results & Graphics
-1. 
-**General Use:** Open the file `/graphics_scripts/graphics.R` in R Studio and run it. All the necessary R files and functions will be sourced automatically, and plots will be generated. To view a specific plot, please source the entire `graphics.R` file first, then run the function to create the desired plot (e.g. `plot_heatmap` or `plot_boxplot`).
+2. Results
 
-Only the data with the final results of the different algorithms is included due to privacy concerns - follow the instructions below to start with the initial data and run every function on your own.
+The code to produce the results are in the `graphics_scripts/tests` folder. There are 5 "tests" that are explained below:
+- test1.R: In this file, we perform 5-fold cross validation to estimate the accuracy of the proposed algorithm & find the best short & long moving average pair over ALL the data
 
-**Specific Instructions**
-1. Obtain the following publicly available data sets from [Awesome-CGM](https://github.com/irinagain/Awesome-CGM) and run their respective preprocessor scripts (which can be found with the data sets). Put the resulting csv files in the `/graphics_scripts/data/` folder **with the names given below**:
-	
+- test2.R: we attempt to estimate the unbiased accuracy of the proposed algorithm by randomly splitting all the samples into 2 groups, finding the optimal short/long MA lengths on one data set and then using those parameters to calculate the error on the other data set
 
-2. Run the `/graphics_scripts/load_data.R` file to properly extract the needed data.
+- test3.R: These results are not used in the paper but could make an interesting follow-up
 
-3. Run the `/graphics_scripts/helpers.R` file which contains the following functions
-	- **single_error_iglu**: calculates the error for V1 and V2 of the iglu MAGE algorithm on a given sample compared to the manual calculation
-	- **pod_error_iglu**: calculates the error for V1 and V2 of the iglu MAGE algorithm on a given set of samples (indicated by sample indices) compared to manual calculations
-	- **mage_error**: calculates the error for an arbitrary algorithm compared to the manual calculations
-	- **create_pem/create_pem2**: Specifically for the V2 iglu MAGE algorithm. Returns a 38x38 matrix of the mean errors of the algorithm from the manual calculations. (PEM = Percent Error Matrix) (Note: this function is very computationally intensive as the iglu V2 MAGE function is run approximately `38*38*46*0.5 = 33212` times.)
-5. Run the `/graphics_scripts/ggplot_graphics.R` file which contains the following functions.
-	- **plot_heatmap**: plots a ggplot heatmap for the 38x38 matrix returned from the `create_pem` function
-	- **plot_boxplot**: plots a ggplot boxplot given a data frame where each column is a different box (e.g. a use case could be each cell is the error for a specific algorithm on a sample)
-	- **algorithm_errors**: constructs a data frame of errors for a given algorithm (?)
-6. Run the `/graphics_scripts/external algorithms/save_df_as_csv.R` file. This will automatically save each data frame of cgm data in `cgm_dataset_df` to a separate csv file in the `/graphics_scripts/external algorithms/data/files` folder.
-7. Follow these instructions to generate the manual calculations for each of the following algorithms
-	- CGMAnalysis: Uncomment line 5 from `/graphics_scripts/external algorithms/cgmanalysis_mage_calc.R` and then run the file. (Note: the `cgmvariables` function sometimes fails with `test40.csv`. Delete the problematic file from the `/graphics_scripts/external algorithms/data` file and rerun.)
-	- CGMQuantify: Run the `/graphics_scripts/external algorithms/cgmquantify/mage.py` file and then the `/graphics_scripts/external algorithms/cgmquantify_mage_calc.R` file
-	- EasyGV: Place the raw data from each file in `/graphics_scripts/external algorithms/data/files` in the [EasyGV Excel workbook](https://www.phc.ox.ac.uk/research/technology-outputs/easygv) provided in `/graphics_scripts/external algorithms/data`. (Note: by using this workbook you agree to the EasyGV Terms and Conditions [here](https://www.phc.ox.ac.uk/research/technology-outputs/easygv).) Then, run the `/graphics_scripts/external algorithms/easygv_mage_calc.R`.
+- test4.R: In this file, we compare the difference between MAGE+ and MAGE-. We expect the correlation to be moderate as Baghurst asserts that MAGE+ and MAGE- often do not correlate well
 
-At this point, it is possible to reproduce any graphic or result in the paper. The code for reproducing the graphics in the paper is given in `/graphics_scripts/graphics.R`.
+- test5.R: This file calculates the average time of each CGM sample
+
+3. Graphics
+The `graphics_scripts/ggplot_graphics.R` has helper functions that will generate the publication-ready graphics for you. The `graphics_scripts/tests/Figures/figures.R` file will automatically generate and save the figures for you.
 
 ## How to Reproduce Manual Calculations
 **General Use:** To reproduce the manual calculations and plots, use the files in the plot_scripts folder. Each manual calculation dataset has an R script and a corresponding pdf of plots. 
