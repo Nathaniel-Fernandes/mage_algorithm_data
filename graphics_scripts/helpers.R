@@ -42,15 +42,15 @@ pod_error_iglu <- function(pod, vector = FALSE, algo = c('iglu_ma', 'iglu_naive'
 
   percent_err <- abs(err) * 100
   
-  if(vector) {
+  if(vector == TRUE) {
     return(percent_err)
   }
   
-  if (calculate_mean){
-    mean(percent_err, na.rm = T)
-  } else{
+  if (calculate_mean == FALSE){
     median(percent_err, na.rm = T)
   }
+
+  mean(percent_err, na.rm = T)
 }
 
 
@@ -108,12 +108,12 @@ create_pem <- function(pod, max_n = 38) {
   rowMeans(expanded_array[,,], dims = 2, na.rm = TRUE) # collapse the array
 }
 
-create_pem2 <- function(pod, max_n = 38) {
+create_pem2 <- function(pod, max_n = 38, calculate_mean = TRUE) {
   m <- matrix(NA, max_n, max_n)
   
   for(long in 16:max_n) {
     for(short in 1:15) {
-      m[short, long] <- pod_error_iglu(pod, short_ma = short, long_ma = long)
+      m[short, long] <- pod_error_iglu(pod, calculate_mean=calculate_mean, short_ma = short, long_ma = long)
     }
   }
   return(m)
