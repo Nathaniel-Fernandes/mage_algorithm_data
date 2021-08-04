@@ -15,38 +15,48 @@ source("./graphics_scripts/graphics.R") # loads data & helper functions
 load('./graphics_scripts/tests/test1/cv_errors.Rda')
 
 mean(cv_errors) 
-# 5.82% 
+# 5.83% 
 
 
 # 2. Find best short/long moving average pair over all 45 samples
 
-pem_all <- create_pem2(1:length(cgm_dataset_df)) # expensive
-save(pem_all, file="./graphics_scripts/tests/test1/pem_all_test726.Rda")
+# pem_all <- create_pem2(1:length(cgm_dataset_df)) # expensive
+# pem_all_median <- create_pem2(1:length(cgm_dataset_df), calculate_mean = FALSE)
 
-pem_all_median <- create_pem2(1:length(cgm_dataset_df), calculate_mean = FALSE)
+# save(pem_all, file="./graphics_scripts/tests/test1/pem_all.Rda")
+# save(pem_all_median, file="./graphics_scripts/tests/test1/pem_all_median.Rda")
 
-load('./graphics_scripts/tests/test1/pem_all.Rda')
+load("./graphics_scripts/tests/test1/pem_all.Rda")
+load("./graphics_scripts/tests/test1/pem_all_median.Rda")
 
 plot_heatmap(pem_all) # Can visualize results
-best_ma <- find_min_poderror(pem_all)[1,]
+plot_heatmap(pem_all_median)
 
+best_ma <- find_min_poderror(pem_all)[1,]
 best_ma
 #     values  ind short long
 #1183 4.85149 V32     5   32
 
+best_ma_median <- find_min_poderror(pem_all_median)[1, ]
+best_ma_median
+#        values ind short long
+# 1183 4.861982 V32     5   32
+
+# NOTE: I find it pretty surprising that the median and mean give exactly the same values
+
 
 # 3. Calculate mean and five-number summary on error for all samples
-
 all_errors <- as.numeric(pem_all)
 all_errors <- all_errors[!is.na(all_errors)] 
 
 mean(all_errors)
-# 7.585036
+# 7.62
 
 quantile(all_errors)
 summary(all_errors)
-# 0%        25%       50%       75%      100% 
-# 4.851490  6.869470  7.688021  8.230413 11.649731 
+#   Min. 1st Qu.  Median    Mean  3rd Qu.    Max. 
+# 4.862    6.920   7.725   7.621   8.272  11.660 
+
 
 # 4. Plot a boxplot comparing all the algorithms accuracy on all 45 samples
 errors_df <- make_boxplot_df(1:length(cgm_dataset_df), short_ma=best_ma$short, long_ma=best_ma$long)
@@ -54,4 +64,3 @@ plot_boxplot(errors_df, "Algorithm Comparison vs Manual (5, 32)")
 
 sd_err <- sapply(errors_df, sd, na.rm=TRUE)
 summary_err <- sapply(errors_df, summary)
-

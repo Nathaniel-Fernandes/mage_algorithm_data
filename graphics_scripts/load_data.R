@@ -23,7 +23,6 @@ JHU_csv <- paste0(filepath, "ExampleData5Subjects.csv")
 Dubosson2018 <- read.csv(Dubosson2018_csv, header = TRUE)
 Hall2018 <- read.csv(Hall2018_csv, header = TRUE)
 Tsalikian2005 <- read.csv(Tsalikian2005_csv, header = TRUE)
-# JHU <- example_data_5_subject
 JHU <- read.csv(JHU_csv, header=TRUE)
 
 # 3. Combine all the data into "master" store
