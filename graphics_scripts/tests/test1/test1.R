@@ -98,3 +98,4 @@ errors_tidy %>%
 #3 iglu (naive)    39.0  42.0  32.6    48.3 
 #4 EasyGV          23.4  11.3   6      22.3 
 #5 cgmanalysis     23.9  20.3   8.61   32.1 
+#6 cgmquantify     91.9  78.4  30.8   132.

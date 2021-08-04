@@ -2,8 +2,6 @@
 
 source("./graphics_scripts/graphics.R") # Source this file to load data & helper functions!
 
-cgm_dataset_df
-
 time_duration <- sapply(1:length(cgm_dataset_df), function(x) {
   start_time <- as.POSIXct(cgm_dataset_df[[x]]$time[1])
   end_time <- as.POSIXct(cgm_dataset_df[[x]]$time[length(cgm_dataset_df[[x]]$time)])
