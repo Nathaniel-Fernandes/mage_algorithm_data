@@ -80,11 +80,11 @@ plot_boxplot(errors_df)
 # pem_g1 <- create_pem2(group1)
 # pem_g2 <- create_pem2(group2)
 
-# save(pem_g1, file="./graphics_scripts/tests/test2/pem_g1a.Rda")
-# save(pem_g2, file="./graphics_scripts/tests/test2/pem_g2a.Rda")
+# save(pem_g1, file="./graphics_scripts/tests/test2/pem_g1.Rda")
+# save(pem_g2, file="./graphics_scripts/tests/test2/pem_g2.Rda")
 
-load('./graphics_scripts/tests/test2/pem_g1a.Rda')
-load('./graphics_scripts/tests/test2/pem_g2a.Rda')
+load('./graphics_scripts/tests/test2/pem_g1.Rda')
+load('./graphics_scripts/tests/test2/pem_g2.Rda')
 
 plot_heatmap(pem_g1)
 plot_heatmap(pem_g2)
@@ -95,10 +95,8 @@ best_ma_g2 <- find_min_poderror(pem_g2)[1,]
 best_ma_g1
 best_ma_g2
 
+# First group: Error 7.82%
+pod_error_iglu(group1, short_ma=best_ma_g2$short, long_ma=best_ma_g2$long) 
 
-# First group: Error 7.80%
-pod_error_iglu(group1, vector=TRUE, short_ma=best_ma_g2$short, long_ma=best_ma_g2$long) 
-
-# Second Group: Error 11.80%
+# Second Group: Error 12.46%
 pod_error_iglu(group2, short_ma=best_ma_g1$short, long_ma=best_ma_g1$long) 
-
