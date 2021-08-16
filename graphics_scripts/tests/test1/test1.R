@@ -14,7 +14,7 @@ source("./graphics_scripts/graphics.R") # loads data & helper functions
 
 load('./graphics_scripts/tests/test1/cv_errors.Rda')
 
-mean(cv_errors) 
+mean(cv_errors) # across all
 # 5.82% 
 
 
@@ -83,7 +83,10 @@ p
 
 figure.path = paste0(getwd(), "/graphics_scripts/tests/Figures/")
 
+# pdf figure
 pdf(file = paste(figure.path, "Boxplots.pdf"), width=10, height=6)
+# png figure
+png(file = paste0(figure.path, "Boxlots.png"), pointsize = 2, width = 4500, height = 3000, res = 500)
 print(p)
 dev.off()
 
