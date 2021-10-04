@@ -5,14 +5,35 @@ More specifically, you can find:
 
 1. 4 CGM data sets:  Hall (2018), Tsalikian (2005), Dubosson (2018), and Broll et al. (2021)
 
-2. 51 manual MAGE calculations (6 were excluded from analyses due to either being too short or having large periods of NA)
+2. 51 manual MAGE calculations (6 were excluded from analyses due to either being too short or having large periods of NA), thus 45 manual calculations were used for final accuracy evaluations
 
 3. Functions used to evaluate and analyze the MAGE algorithms: iglu_ma (proposed), [iglu_naive](https://cran.r-project.org/web/packages/iglu/index.html), [cgmquantify v0.5](https://github.com/brinnaebent/cgmquantify), [EasyGV Excel workbook (3/11/2021)](https://www.phc.ox.ac.uk/research/technology-outputs/easygv), and [cgmanalysis v2.7.2](https://cran.r-project.org/web/packages/cgmanalysis/index.html)
 
 4. Functions used to generate the figures
 
 ## 1. How to Access CGM Data Sets
-We used the data sets Hall (2018), Tsalikian (2005), Dubosson (2018), and JHU originally found on [Awesome-CGM](https://github.com/irinagain/Awesome-CGM). The pre-processed data is included in this repository in the `data/` folder.
+We used the data sets Hall (2018), Tsalikian (2005), Dubosson (2018) originally found on [Awesome-CGM](https://github.com/irinagain/Awesome-CGM). Additional, we used the example dataset available within R package iglu by Broll et al. (2021).
+
+| Dataset      | Diabetes Type | Age group | Subject ID | Number of days used (CGM traces)
+| ----------- | ----------- | ----------- | ----------- | ----------- |
+| [Hall et al. (2018)](https://doi.org/10.1371/journal.pbio.2005143)    | None       | Adults (> 18) | 1636-69-001 | 5|
+|    |      |  | 1636-69-026 | 6|
+| [Tsalikian et al. (2005)](https://doi.org/10.1016/j.jpeds.2005.04.065)   | Type 1       | Children (10 - 18) | 2 | 1|
+|    |      |  | 7| 2|
+|    |      |  | 8| 1|
+|    |      |  | 11| 2|
+|    |      |  | 15| 1|
+|    |      |  | 43| 1|
+|    |      |  | 44| 1|
+| [Dubosson et al. (2005)](https://doi.org/10.1016/j.imu.2018.09.003)   | Type 1       | Adults (> 18)  | 1 | 5|
+|    |      |  | 2| 2|
+| [Broll et al. (2021)](https://doi.org/10.1371/journal.pone.0248560)   | Type 2       | Adults (> 18)  | Subject 1 | 1|
+|    |      |  | Subject 2| 5|
+|    |      |  | Subject 3| 1|
+|    |      |  | Subject 4| 5|
+|    |      |  | Subject 5| 6|
+
+The pre-processed data is included in this repository in the `data/` folder.
 
 By using this data, you consent to the following User Agreements.
 
