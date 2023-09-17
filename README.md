@@ -1,5 +1,5 @@
 # MAGE
-The goal of our work is to “design an open-source algorithm that calculates MAGE more accurately than existing algorithms and enables easy exploration of the data through a visual display”. This repository holds the intuition, implementation, and code to reproduce graphics and results in the associated paper: [Link to be added].  
+The goal of our work is to “design an open-source algorithm that calculates MAGE more accurately than existing algorithms and enables easy exploration of the data through a visual display”. This repository holds the intuition, implementation, and code to reproduce graphics and results in the associated paper: [Mean Amplitude of Glycemic Excursions, a Measure of Diabetic Instability](https://diabetesjournals.org/diabetes/article/19/9/644/3599/Mean-Amplitude-of-Glycemic-Excursions-a-Measure-of).  
 
 More specifically, you can find:
 
