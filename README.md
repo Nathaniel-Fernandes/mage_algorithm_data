@@ -1,11 +1,11 @@
 # MAGE
-The goal of our work is to “design an open-source algorithm that calculates MAGE more accurately than existing algorithms and enables easy exploration of the data through a visual display”. This repository holds the intuition, implementation, and code to reproduce graphics and results in the associated paper: [Mean Amplitude of Glycemic Excursions, a Measure of Diabetic Instability](https://diabetesjournals.org/diabetes/article/19/9/644/3599/Mean-Amplitude-of-Glycemic-Excursions-a-Measure-of).  
+The goal of our work is to design an open-source algorithm that calculates MAGE more accurately than existing algorithms and enables easy exploration of the data through a visual display. This repository holds the intuition, implementation, and code to reproduce graphics and results in the associated paper: [Mean Amplitude of Glycemic Excursions, a Measure of Diabetic Instability](https://diabetesjournals.org/diabetes/article/19/9/644/3599/Mean-Amplitude-of-Glycemic-Excursions-a-Measure-of).  
 
 More specifically, you can find:
 
 1. 4 CGM data sets:  Hall (2018), Tsalikian (2005), Dubosson (2018), and Broll et al. (2021)
 
-2. 51 manual MAGE calculations (6 were excluded from analyses due to either being too short or having large periods of NA), thus 45 manual calculations were used for final accuracy evaluations
+2. 51 manual MAGE calculations. We only used 45 manual calculations for final accuracy evaluations since 6 were excluded due to either being too short or having large periods of NA.
 
 3. Functions used to evaluate and analyze the MAGE algorithms: iglu_ma (proposed), [iglu_naive](https://cran.r-project.org/web/packages/iglu/index.html), [cgmquantify v0.5](https://github.com/brinnaebent/cgmquantify), [EasyGV Excel workbook (3/11/2021)](https://www.phc.ox.ac.uk/research/technology-outputs/easygv), and [cgmanalysis v2.7.2](https://cran.r-project.org/web/packages/cgmanalysis/index.html)
 
@@ -48,9 +48,9 @@ We selected 51 days from the above data sets and manually calculated MAGE. We ha
 
 The plots representing CGM traces for the 45 manual calculations (and the code to generate them) are in the `plot_scripts` folder.
 
-You can find the calculated MAGE value along with other information about each sample in the `data/manual calculations.xlsx` file. **DO NOT MODIFY** this file since the analysis scripts below require the information to be accurate and in a certain order.
+You can find the calculated manual MAGE value along with other information about each sample in the `data/manual calculations.xlsx` file. **DO NOT MODIFY** this file since the analysis scripts below require the information to be accurate and in a certain order.
 
-## 3. Data Analysis
+## 3. Data Analysis # TODO:
 All of the analyses done can be found in the `graphics_scripts/tests` folder.
 
 - test1.R: In this file, we perform 5-fold cross validation to estimate the accuracy of the proposed algorithm & find the best short & long moving average pair over ALL the data
@@ -63,13 +63,13 @@ All of the analyses done can be found in the `graphics_scripts/tests` folder.
 
 - test5.R: This file calculates the average time of each CGM sample
 
-## 4. Functions used to create the plots
-The functions used to create the plots can be found in the `graphics_scripts/tests/figures.R` file. The plots include 
-  a) a CGM trace with moving averages displayed, 
-  b) a CGM trace with gaps highlighted, 
-  c) a heatmap with the % error of the proposed algorithm based on different combos of short/long MAs, 
-  d) a boxplot comparing the % errors of the different algorithmse
-  e) a scatter plot comparing MAGE+ with MAGE-
+## 4. Functions used to create the plots # TODO:
+The functions used to create the plots can be found in the `graphics_scripts/tests/figures.R` file. The plots include a  
+  a) CGM trace with moving averages displayed, 
+  b) CGM trace with gaps highlighted, 
+  c) heatmap with the % error of the proposed algorithm based on different combos of short/long MAs, 
+  d) boxplot comparing the % errors of the different algorithmse
+  e) scatter plot comparing MAGE+ with MAGE-
   
 For a) and b), the proposed function `iglu::mage()` can return a ggplot with the cgm trace with short/long MAs displayed and gaps highlighted. See the [iglu documentation](https://github.com/irinagain/iglu/blob/master/man/mage_ma_single.Rd) for more info.
 
@@ -77,7 +77,7 @@ Part c) uses the `plot_heatmap()` function found in `graphics_scripts/ggplot_gra
 
 Part d) uses `plot_boxplot()` and `make_boxplot_df()` found in `graphics_scripts/ggplot_graphics.R` and the `errors_df` found in `graphics_scripts/tests/test1.R`. The `make_boxplot_df()` function returns a data frame where each column is the % error of a different algorithm on the manual calculation cgm traces.
 
-e) This isn't included in the paper, but kind of supports the hypothesis that MAGE+ and MAGE- are moderately correlated.
+e) This isn't included in the paper, but supports the hypothesis that MAGE+ and MAGE- are moderately correlated.
 
 ## R Packages Needed
 - [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html)
