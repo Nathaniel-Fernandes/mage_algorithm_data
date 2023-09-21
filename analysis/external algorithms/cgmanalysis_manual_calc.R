@@ -5,11 +5,10 @@ library(cgmanalysis)
 # 1. Complete Data Analysis from Scratch
 
 # This function from cgmanalysis calculates mage for the cgmdata in files in the input directory
-#cgmvariables("./graphics_scripts/external algorithms/data/files/", "./graphics_scripts/external algorithms/data/", outputname = "cgmanalysis results")
-
+#cgmvariables("./analysis/external algorithms/data/files/", "./analysis/external algorithms/data/", outputname = "cgmanalysis results")
+# TODO: why is this commented out? will it overwrite some data?
 
 # 2. Load Results from CSV
 
 cgmanalysis_data <- read.csv('./graphics_scripts/external algorithms/data/cgmanalysis results.csv')
 cgmanalysis_mage <- cgmanalysis_data$r_mage
-

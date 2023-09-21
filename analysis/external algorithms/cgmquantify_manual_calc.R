@@ -1,5 +1,7 @@
 # 1. Complete Data Analysis from Scratch
 
+# TODO: fix this
+
 # DOES NOT WORK YET. Use the command line instead
 # library("reticulate")
 # conda_create("r-reticulate")
