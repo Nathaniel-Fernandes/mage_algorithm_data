@@ -1,8 +1,10 @@
 library(ggplot2)
 library(dplyr)
 
-######################
-## Graphics - HEATMAP
+########################
+## Graphics - HEATMAP ##
+########################
+
 plot_heatmap <- function(collapsed_err, title = "MAGE vs. Manual Calculations", low = 0, high = 31) {
   sa <- stack(as.data.frame(collapsed_err))
   sa$x <- rep(seq_len(nrow(collapsed_err)), ncol(collapsed_err))
@@ -108,4 +110,3 @@ pod_split <- function(allpods, splits = 2, seed = 122) {
   
   return(pods)
 }
-

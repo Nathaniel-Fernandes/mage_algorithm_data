@@ -1,5 +1,5 @@
 # Script to load the data and manual calculations to reproduce graphics
-# Author: Nathaniel Fernandes
+# Author: Nathaniel J. Fernandes
 # Date: February 15, 2021
 
 # 1. Require necessary packages

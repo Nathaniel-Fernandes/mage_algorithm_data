@@ -22,12 +22,12 @@ single_error_iglu <- function(sample_index, algo = c('iglu_ma', 'iglu_naive'), .
   return(percent_err)
 }
 
-
 # 2. Percent Error on a vector of sample indices (IGLU)
 # @param pod A numeric vector of sample indices
 # @param vector Whether to return a vector of errors for each sample index or the mean
 # @param ... Any other parameters to pass to "single_error_iglu"
 pod_error_iglu <- function(pod, vector = FALSE, algo = c('iglu_ma', 'iglu_naive'), calculate_mean = TRUE, ...) {
+  # TODO: change pod_error_iglu to use single_error_iglu internally to avoid duplication
   
   algo = match.arg(algo)
   percent_err <- NULL
@@ -53,13 +53,11 @@ pod_error_iglu <- function(pod, vector = FALSE, algo = c('iglu_ma', 'iglu_naive'
   mean(percent_err, na.rm = T)
 }
 
-
 # 3. Percent Error on arbitrary algorithm (ANY)
 # @param pod A vector of sample indices
 # @param algo_calc The algorithm's MAGE calculation on a sample of CGM data
 # @param manual_calc The manual MAGE calculation on a sample of CGM data
 # @param vector Boolean. True = return vector of % error. False = return mean of % errors
-
 mage_error <- function(pod, algo_calc, manual_calc, vector = FALSE) {
   err <- (algo_calc[pod] - manual_calc[pod]) / manual_calc[pod]
   
@@ -74,7 +72,7 @@ mage_error <- function(pod, algo_calc, manual_calc, vector = FALSE) {
 
 # 4. Optimize MA lengths (IGLU V2)
 # Given a pod of "sample indices" create_pem will calculate the % error for each combination
-# of short and long moving average lengths (1 to n) on the samples and return a n X n matrix
+# of short and long moving average lengths (1 to n) on the samples and return a NXN matrix
 # where each cell is the % error. 
 #
 # Notes: 
@@ -87,6 +85,8 @@ mage_error <- function(pod, algo_calc, manual_calc, vector = FALSE) {
 
 # @param pod A vector of sample indices
 # @param max_n The maximum length of the moving average
+
+# TODO: get rid of one of these, so we don't have duplication. Assert they're equivalent first.
 create_pem <- function(pod, max_n = 38) {
   structure <- rep(NaN, max_n*max_n*length(pod));
   expanded_array <- array(structure, c(max_n, max_n, length(pod)))
@@ -121,7 +121,6 @@ create_pem2 <- function(pod, max_n = 38, calculate_mean = TRUE) {
 
 # 5. Cross Validate IGLU V2
 # Perform an n-fold cross validation, where n is the length(pod_list)
-
 cross_val <- function(pod_list, vector = FALSE, return_pem=FALSE) {
   ln <- length(pod_list) # number of pods to determine n in n-fold cross val
   
